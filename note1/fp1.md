@@ -69,3 +69,152 @@ git remote add o1 https://tangjian234:Tangwin@123@github.com/
 git remote add o1 git@github.com:tangjian234/web.git
 git push -u o1 main
 
+### Tasks Planning 
+[25_min]
+#### Objective 
+   1. 10 tasks with title and time 
+   2. 
+#### what 
+   1. input setting 
+   2. economist download 
+   3. find good inspiration music 
+   4. Git actions : shell steps : 
+   5. steps of working (upload, download) between rpi and 
+   6. rpi connection setup  
+   7. first level sorting on rpi actions , list other tasks
+   8. form study of django  : 
+   9. review email 
+   10. send form for the canada inquire
+   11. formulate and change the date work. move others to dos 
+       1.  collect the list of temp file and build the todo structure. 
+    
+<!------------------------------------------------------------------------->
+### input setting 
+
+  #### Value
+  DONE Gold [10_min] [Priority_1]  [Difficulty_5] [Importance_1] 
+
+  #### Objective 
+  1.  Set up Optimized input:
+
+  #### Howto
+  1. Desk is clean .
+  2. Water/drink is ready. Um Uh Ha ha
+  3. Listen device is ready.  
+  4. Use hourglass for time tracking : random time 
+  5. Using xunfei input : make a shortcut to 
+     1. make the floating input window always on top 
+  #### Result
+     1. Best life. Best work.  
+     2. Everything is ready
+  
+   
+
+<!------------------------------------------------------------------------->
+
+### Economist download 
+  #### Value
+  DONE Gold [10_min] [Priority_4]  [Difficulty_5] [Importance_4] 
+
+  #### Objective 
+  1. download economist last version .
+  2. google login 
+  3. Download and transfer. 
+
+
+
+### Misc 
+  1. Change the glob : value etc : tab 
+  2. Download and summary 10 gold song 
+  3. Howto get rid of the tired feeling :
+  4. short cut to xunfei input : put to 
+
+
+### Daily Music jam : 
+  #### Value
+   DONE Gold [15_min] [Priority_4]  [Difficulty_5] [Importance_4] 
+
+#### what
+   - Music collection mix 
+    - 2 zhang liangying : good  
+    - 3 tradiational music 
+    - 1 xiao ao jiang hu 
+    - 3 interesting king and generals 
+    - 3 hong kong curse input. 
+
+### Buy from safeway 
+  #### Value
+  [10_min] [Priority_4]  [Difficulty_5] [Importance_4]   
+  
+  #### Objective 
+   1.  : easy to cook food 
+#### Result
+  Brought 
+ 
+
+### Git actions : shell steps : 
+
+#### Objective 
+   1. make powershell file to : 
+      1. download from git
+      2. upload from  
+   2. Change all repo into 
+
+####  
+
+
+###  steps of working (upload, download) between rpi and 
+  #### Value
+  [10_min] [Priority_4]  [Difficulty_5] [Importance_4]  
+  #### Objective 
+   1. 
+  #### Howto
+  1. 
+
+###  rpi connection setup  
+  #### Value
+  [10_min] [Priority_4]  [Difficulty_5] [Importance_4]  
+  #### Objective 
+   1. 
+  #### Howto
+  1. 
+
+### first level sorting on rpi actions , list other tasks
+  #### Value
+  [10_min] [Priority_4]  [Difficulty_5] [Importance_4]  
+  #### Objective 
+   1. 
+  #### Howto
+  1. 
+
+### form study of django  : 
+  #### Value
+  [10_min] [Priority_4]  [Difficulty_5] [Importance_4]  
+  #### Objective 
+   1. 
+  #### Howto
+  1. 
+
+### review email 
+  #### Value
+  [10_min] [Priority_4]  [Difficulty_5] [Importance_4]  
+  #### Objective 
+   1. 
+  #### Howto
+  1. 
+
+### send form for the canada inquire
+  #### Value
+  [10_min] [Priority_4]  [Difficulty_5] [Importance_4]  
+  #### Objective 
+   1. 
+  #### Howto
+
+
+### formulate and change the date work. move others to dos 
+  #### Value
+  [10_min] [Priority_4]  [Difficulty_5] [Importance_4]  
+  #### Objective 
+   1. 
+  #### Howto
+  1. 
