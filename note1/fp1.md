@@ -64,11 +64,6 @@ https://www.makeuseof.com/tag/raspberry-pi-code-oss/
 ### 
 
 
-ddff
-editormacros
-macros
-pyPasteIndent
-
 git remote add o1 https://tangjian234:Tangwin@123@github.com/
 
 git remote add o1 git@github.com:tangjian234/web.git
