@@ -8,7 +8,7 @@ app_name=$2
 s=$project_name"_env"
 
 # 1. build virtural env 
-ssource ~/.local/bin/virtualenvwrapper.sh
+source ~/.local/bin/virtualenvwrapper.sh
 echo $s
 mkvirtualenv $s
 
