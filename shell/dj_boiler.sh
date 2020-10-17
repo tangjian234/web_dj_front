@@ -3,12 +3,13 @@
 project_name=$1
 app_name=$2
 
-echo $project_name
-echo $app_name
+#echo $project_name
+#echo $app_name
 s=$project_name"_env"
 
 # 1. build virtural env 
-source ~/.local/bin/virtualenvwrapper.sh
+# source ~/.local/bin/virtualenvwrapper.sh
+echo $s
 mkvirtualenv $s
 
 # 2. create project 
