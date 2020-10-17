@@ -1,13 +1,3 @@
-editor is here 
-
-Here s
-
-
-dkfk
-Finally. Finally, a piece, albeit an opinion piece, in the NYT acknowledging China's amazing success in dealing with COVID. 
-
-best knowle
-There are multiple sources of American failure, some of which are catalogued here. But I have yet to see anything about our huge self inflicted blindspot when it comes to China. Left or Right, we have so convinced ourselves that China is Evil incarnate that we (from tabloid to president) have refused to appraise her COVID response without prejudice. I believe that this has been a huge disservice, and I don't mean to China. We have chosen to essentially ignore the greatest, and possibly most effective , public health mobilization of all time. They gave us a playbook. We need to look at it. We don't have to follow everything in it but we have to acknowledge that it worked and we need to understand why. But we continue to deny their success as well as science. And we insist on conflating acknowledging the soundness of their approach with supporting all of China's policies about everything. And here we are....
 
 fp1.md
 - [fp1.md](file:///~/Documents/fp1.md) 
@@ -101,20 +91,6 @@ git push -u o1 main
   4. short cut to xunfei input : put to 
 
 
-### Daily Music jam : 
-  #### Value
-   DONE Gold [15_min] [Priority_4]  [Difficulty_5] [Importance_4] 
-
-  #### what
-    - Music collection mix 
-      - 2 zhang liangying : good  
-      - 3 tradiational music 
-      - 1 xiao ao jiang hu 
-      - 3 interesting king and generals 
-      - 3 hong kong curse input. 
-
-
-
 ### Formulate and change the date work. move others to dos 
   #### Value
   [10_min] [Priority_4]  [Difficulty_5] [Importance_4]  
@@ -125,12 +101,23 @@ git push -u o1 main
 
 ### first level sorting on rpi actions , list other tasks
   #### Value
-  [10_min] [Priority_4]  [Difficulty_5] [Importance_4]  
+  [30_min] [Priority_4]  [Difficulty_5] [Importance_4]  
+  
   #### Objective 
-   1. 
-  #### Howto
-  1. 
+   1. Collect the rpi files : 
+   2. Summarize the structures 
+   3. Basic Sort :  
+  
+  #### Result
+  
+     1. rpi files : C:\local\work\Web\web\note
+        1. Raspberry_pi.md
+        2. Django_howto.md
+        3. fp1.md 
+        4. Django_apache.md
+     2. 
 
+  
 ### Form study of django  : 
   #### Value
   [10_min] [Priority_4]  [Difficulty_5] [Importance_4]  
