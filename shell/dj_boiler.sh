@@ -1,7 +1,7 @@
 
 
-project_name=$0
-app_name=$1
+project_name=$1
+app_name=$2
 
 echo $project_name
 echo $app_name
