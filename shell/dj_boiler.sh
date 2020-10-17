@@ -9,8 +9,8 @@ s=$project_name"_env"
 
 # 1. build virtural env 
 source ~/.local/bin/virtualenvwrapper.sh
-echo $s
-mkvirtualenv $s
+# echo $s
+echo "mkvirtualenv $s"
 
 # 2. create project 
 #django-admin startproject $project_name
