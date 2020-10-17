@@ -15,7 +15,7 @@ django-admin startproject $project_name
 cd $project_name
 python3 manage.py startapp $app_name 
 
-# 3. run 
+# 3. run server
 python3 manage.py runserver
 
 
@@ -24,3 +24,5 @@ source ~/.local/bin/virtualenvwrapper.sh
 # echo $s
 echo "remember: "
 echo "mkvirtualenv $s"
+
+
