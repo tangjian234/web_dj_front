@@ -1,0 +1,208 @@
+ {% extends "base.html" %}
+
+ {% block content-show_asin_task %}
+ {% load static %}
+ <section class="dashboard-header section-padding">
+   <div class="container-fluid">
+     <!-- Get variables from view.py file   
+     asin_list : list of asins, string, seperated by ; 
+     asin_dict_list: asin data : 
+          key : "snapshot of a time" , e.g date_1 
+          vaule : "key parameter of a asin: price, ranking, comments " 
+     data : test data to send 
+     -->
+     <p>{{ x_axis  | json_script:"x_axis"}}</p>
+     <p>{{ asin_list  | json_script:"asin_list"}}</p>
+     <p>{{ asin_dict_list  | json_script:"asin_dict_list"}}</p>
+     <p>{{ data  | json_script:"data"}}</p>
+     
+     <!-- Row : 1  :  Task Table   -->
+     <div class="row d-flex align-items-md-stretch">
+       <!-- Table  -->
+       <div class="col-lg-8 col-md-12 flex-lg-last flex-md-first align-self-baseline">
+         <div class="card">
+           <div class="card-header">
+             <h2>Task list</h2>
+           </div>
+           <div class="card-body">
+             <div class="table-responsive">
+               <table class="table table-striped table-hover">
+                 <thead>
+                   <tr>
+                     <!-- row number -->
+                     <th>#</th>
+                     <!-- <th>ASIN_task_id</th>  -->
+                     <th>ASIN_Name_List</th>
+                     <th>Status</th>
+                     <th>ASIN_Start_Time</th>
+                     <th>ASIN_End_time</th>
+                     <th>Action</th>
+                     <th>
+                     <!-- Must have form to post and send data to views.py -->
+                     <form method="POST">
+                     {% csrf_token %}
+                     <button class="btn btn-primary" type="Submit" name="shutdown-id">Shutdown</button>
+                     </form>
+                     </th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   {% for item in all_objects %}
+                   <tr>
+                     <!-- row number -->
+                     <td scope="row">{{ forloop.counter }}</td>
+                     <!-- asin name list -->
+                     <td>
+                       {{item.ASIN_Name_List}}
+                     </td>
+                     <!-- asin task Status  -->
+                     <td>
+                       {% if "Complete" == item.Request_Status  %}
+                       <button class="btn btn-success" type="button">Completed</button>
+                       {% endif %}
+                       {% if "Ongoing" == item.Request_Status  %}
+                       <button class="btn btn-success" type="button">Ongoing</button>
+                       {% endif %}
+                       {% if "Ready" == item.Request_Status  %}
+                       <button class="btn btn-dark" type="button">Ready</button>
+                       {% endif %}
+                     </td>
+                     <!-- asin task Start end time   -->
+                     <td>{{item.Start_Time}}</td>
+                     <td>{{item.End_Time}}</td>
+
+                     <td>
+
+                       <!-- submit the form inform : run, delete, modify, plot 
+                       data transfer : x[name(run_id)] = value(item.pk) 
+                        run_pk = request.POST.get("run-id")
+                       --> 
+                       <form method="POST">
+                         {% csrf_token %}
+                         <button class="btn btn-primary" type="Submit" name="run-id" value="{{item.pk}}">Run</button>
+                         <button class="btn btn-primary" type="Submit" name="modify-id"
+                           value="{{item.pk}}">Modify</button>
+                         <!-- 
+                           delete Func : delete_pk = request.POST.get("delete-id") = item.pk
+                          -->
+                         <button class="btn btn-primary" type="Submit" name="delete-id"
+                           value="{{item.pk}}">Delete</button>
+
+                         <button class="btn btn-primary" type="Submit" name="plot-id" value="{{item.pk}}">Plot</button>
+
+                       </form>
+                     <td>
+
+                   </tr>
+                   {% endfor %}
+                 </tbody>
+               </table>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+     <!-- Row : 2  : Key Product Comparsion Table   -->
+
+     <div class="row d-flex align-items-md-stretch">
+       <div class="col-lg-8 col-md-12 flex-lg-last flex-md-first align-self-baseline">
+         <div class="card">
+           <div class="card-header">
+             <h2>Product Comparision</h2>
+           </div>
+           <div class="card-body">
+             <div class="table-responsive">
+               <table class="table table-striped table-hover">
+                 <thead>
+                   <tr>
+                     <!-- row number -->
+                     <th>#</th>
+                     <!-- <th>ASIN_task_id</th>  -->
+                     <th>ASIN_Name</th>
+                     <th>Status</th>
+                     <th>Price</th>
+                     <th>Number Of Comment</th>
+                     <th>Rating</th>
+                     <th>Best Seller Ranking</th>
+                     <th>Date_First_Available</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   <!-- Table Display the  asin_dict_list content 
+
+                   How to access dictionary elements in django template** disply first number of date_x data series. 
+                    -->
+                   {% for asin,v in asin_dict_list.items %}
+                   <tr>
+                     <td scope="row">{{ forloop.counter }}</td>
+                     <td>{{ asin }}</td>
+                     <td>READY</td>
+                     <td>{{ v.price_first_number }}</td>
+                     <td>{{ v.no_of_comments_first_number }}</td>
+                     <td>{{ v.rating_first_number }}</td>
+                     <td>{{ v.best_seller_rank_first_number }}</td>
+                     <td>{{ v.date_first_available_first_number }}</td>
+                   </tr>
+                   {% endfor %}
+
+                 </tbody>
+               </table>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+     <!-- Row : 3  :     -->
+     <div class="row d-flex align-items-md-stretch">
+       <!-- Line Chart : 2 product comparision : price    -->
+
+       <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
+        <!-- Json_script : package list into json format :  -->
+        <!-- Corresponding : var d = (data_from_django[asin_list[0]]["price"]); -->
+
+         <div class="card sales-report">
+           <h2 class="display h4">Sales report</h2>
+           <p> Price Comparision of 2 ASIN product-1 </p>
+           <div class="line-chart">
+             <canvas id="2_Product_Price_Comparision"></canvas>
+           </div>
+         </div>
+       </div>
+
+       <!-- Line Chart : 2 product number of comment comparsion  -->
+       <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
+          <div class="card sales-report">
+           <h2 class="display h4">Sales report</h2>
+           <p> Comment Comparision of 2 ASIN product-1 </p>
+           <div class="line-chart">
+             <canvas id="2_Product_Comment_Comparision"></canvas>
+           </div>
+         </div>
+       </div>
+
+     </div>
+
+     <!-- Row : 4  :    -->
+     <div class="row d-flex align-items-md-stretch">
+       <!-- Radar Chart :  radarChartExample   -->
+       <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
+         <div class="card radar-chart-example">
+           <div class="card-header d-flex align-items-center">
+             <h4>Bluetooth Feature Radar Chart</h4>
+           </div>
+           <div class="card-body">
+             <div class="chart-container">
+               <canvas id="radarChartExample"></canvas>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+
+
+   </div>
+ </section>
+ {% endblock %}

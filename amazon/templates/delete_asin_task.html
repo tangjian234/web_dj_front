@@ -1,0 +1,209 @@
+ 
+
+{% extends "base.html" %}
+
+{% block content-show_asin_task %}
+{% load static %}
+
+
+<div class="row">
+            <!-- Table  -->
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-header">
+                  <h2>Task list</h2>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                        	<th>ASIN_task_id</th>
+                          <th>ASIN_name_list</th>
+                          <th>ASIN_Start_time</th>
+                          <th>ASIN_End_time</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                       {% for item in all_objects %}
+                          <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{item.ASIN_task_uuid}}</td>
+                            <td>{{item.asin_name_list}}</td>
+                            <td>{{item.Start_time}}</td>
+                            <td>{{item.End_time}}</td>
+                  
+                            <td>
+                                <form method="POST">
+                                    <input type="hidden" value="{{item.ASIN_task_uuid}}" name="delete-id">.
+                                    <button class="btn btn-primary" type="Submit" value="Delete"></button>
+                                </form>
+                            </td>
+
+                          </tr> 
+                      {% endfor %}  
+                      <p>{{ price_string_1  | json_script:"line_1"}}</p>
+                      <p>{{ price_string_2  | json_script:"line_2"}}</p>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Line Chart -->
+            <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
+              <div class="card sales-report">
+                <h2 class="display h4">Sales report</h2>
+                <p> Price comparision of 2 product </p>
+                <p id="demo"></p>
+                <div class="line-chart">
+                  <canvas id="Price"></canvas>
+                </div>
+              </div>
+            </div>
+</div>
+       
+   
+
+{% endblock %}
+     <!-- JavaScript files-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
+    <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/charts-custom.js"></script>
+    <script src="{% static 'js/charts-home1.js' %}"></script>
+  
+
+    <!-- Main File-->
+    <script src="js/front.js"></script>
+    
+    <script>
+    /*global $, document, Chart, LINECHART, data, options, window*/
+$(document).ready(function () {
+
+    'use strict';
+
+    // Main Template Color
+    var brandPrimary = '#33b35a';
+
+
+    // ------------------------------------------------------- //
+    // Line Chart
+    // ------------------------------------------------------ //
+    var LINECHART = $('#lineCahrt');
+    var myLineChart = new Chart(LINECHART, {
+        type: 'line',
+        options: {
+            legend: {
+                display: false
+            }
+        },
+        data: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July"],
+            datasets: [
+                {
+                    label: "My First dataset",
+                    fill: true,
+                    lineTension: 0.3,
+                    backgroundColor: "rgba(77, 193, 75, 0.4)",
+                    borderColor: brandPrimary,
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    borderWidth: 1,
+                    pointBorderColor: brandPrimary,
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: brandPrimary,
+                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 0,
+                    data: [50, 20, 60, 31, 52, 22, 40],
+                    spanGaps: false
+                },
+                {
+                    label: "My First dataset",
+                    fill: true,
+                    lineTension: 0.3,
+                    backgroundColor: "rgba(75,192,192,0.4)",
+                    borderColor: "rgba(75,192,192,1)",
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    borderWidth: 1,
+                    pointBorderColor: "rgba(75,192,192,1)",
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: [65, 59, 30, 81, 46, 55, 30],
+                    spanGaps: false
+                }
+            ]
+        }
+    });
+
+
+    // ------------------------------------------------------- //
+    // Pie Chart
+    // ------------------------------------------------------ //
+    var PIECHART = $('#pieChart');
+    var myPieChart = new Chart(PIECHART, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                "First",
+                "Second",
+                "Third"
+            ],
+            datasets: [
+                {
+                    data: [300, 50, 100],
+                    borderWidth: [1, 1, 1],
+                    backgroundColor: [
+                        brandPrimary,
+                        "rgba(75,192,192,1)",
+                        "#FFCE56"
+                    ],
+                    hoverBackgroundColor: [
+                        brandPrimary,
+                        "rgba(75,192,192,1)",
+                        "#FFCE56"
+                    ]
+                }]
+        }
+    });
+
+});
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </script>

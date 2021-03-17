@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block sidebar %}
+  <ul class="sidebar-nav">
+    <li><a href="{% url 'index' %}">Home</a></li>
+     <li><a href="{% url 'input_asin' %}">Input ASIN</a></li>
+     <li><a href="{% url 'show_asin' %}">Show ASIN</a></li>
+    <li><a href="">All books -</a></li>
+    <li><a href="">All authors</a></li>
+  </ul>
+{% endblock %}
+
+{% block content %}
+<h1> {{ head_title }}</h1>
+<form action = "" method = "post"> 
+    {% csrf_token %} 
+    {{ form | crispy}} 
+    <input type="submit" value=Submit"> 
+</form> 
+{% endblock %}

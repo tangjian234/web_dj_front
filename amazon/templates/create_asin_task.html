@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block content_create_asin_task %}
+
+
+<div class="container-fluid">
+
+  <h2> {{ head_title }}</h2>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header d-flex align-items-center">
+          <h4>Basic Form</h4>
+        </div>
+        <div class="card-body">
+          <p>Create ASIN Task </p>
+
+          <!--NOTE : Input form-->
+          <form name="myForm" ,id="myForm" method="post">
+            {% csrf_token %}
+            {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+            {% endfor %}
+
+            <!--NOTE : Display  all fields : label and input-->
+            {% for field in form.visible_fields %}
+            <div class="form-group">
+              {{ field.label_tag }}
+              {% render_field field class="form-control" %}
+              {% if field.help_text %}
+              <small class="form-text text-muted">{{ field.help_text }}</small>
+              {% endif %}
+            </div>
+            {% endfor %}
+
+            <!--NOTE: submission of data -->
+            <button type="submit" class="btn btn-primary show-toast" name="asin-form" id="asin-form" onsubmit="show();return false">
+              Submit</button>
+          </form>
+          <div class="toast" data-delay="3000">
+            <div class="toast-header">
+            </div>
+            <div class="toast-body">
+              Form submission!
+            </div>
+          </div>
+          
+          <!--NOTE: Search Form  -->
+
+          <form name="myForm-search" ,id="myForm-search" method="post">
+            {% csrf_token %}
+            {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+            {% endfor %}
+
+            <!--NOTE : Display  all fields : label and input-->
+            {% for field in search_form.visible_fields %}
+            <div class="form-group">
+              {{ field.label_tag }}
+              {% render_field field class="form-control" %}
+              {% if field.help_text %}
+              <small class="form-text text-muted">{{ field.help_text }}</small>
+              {% endif %}
+            </div>
+            {% endfor %}
+
+            <!--NOTE: submission of data -->
+            <button type="submit" class="btn btn-primary show-toast" name="search-form" id="search-form" onsubmit="show();return false">
+              Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="container-fluid">
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+</script>
+
+
+{% endblock %}

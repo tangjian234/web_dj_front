@@ -1,0 +1,137 @@
+2021-03-10 22:22:21,322 django.request ERROR    Internal Server Error: /download/create_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 79, in create_asin_task
+    search_form = ASIN_Search_task_form()
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 378, in __init__
+    self.fields['ASIN_Name_List'].initial  = 'Bluetooth Headset'
+KeyError: 'ASIN_Name_List'
+2021-03-10 22:22:21,326 django.server ERROR    "GET /download/create_asin_task HTTP/1.1" 500 74545
+2021-03-10 22:41:35,714 django.request WARNING  Not Found: /
+2021-03-10 22:41:35,715 django.server WARNING  "GET / HTTP/1.1" 404 2030
+2021-03-11 09:33:36,922 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 190, in show_asin_task
+    scheduler.handle_scrapy_start(scrapy_data)
+  File "C:\Local\Work\Web\web\amazon\download\apscheduler_handle.py", line 97, in handle_scrapy_start
+    self.scheduler.add_listener(self.job_completed,  EVENT_JOB_EXECUTED | EVENT_JOB_ERROR, task_id)
+TypeError: add_listener() takes from 2 to 3 positional arguments but 4 were given
+2021-03-11 09:33:36,926 django.server ERROR    "POST /download/show_asin_task HTTP/1.1" 500 76539
+2021-03-11 15:54:54,830 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 198, in show_asin_task
+    scheduler.handle_scrapy_start(scrapy_data)
+  File "C:\Local\Work\Web\web\amazon\download\apscheduler_handle.py", line 95, in handle_scrapy_start
+    self.scheduler.add_listener(self.job_completed,  EVENT_JOB_EXECUTED | EVENT_JOB_ERROR,task_id)
+TypeError: add_listener() takes from 2 to 3 positional arguments but 4 were given
+2021-03-11 15:54:54,845 django.server ERROR    "POST /download/show_asin_task HTTP/1.1" 500 77230
+2021-03-11 16:02:31,678 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 152, in show_asin_task
+    t = all_objects.get(k)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 418, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 942, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 962, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, *args, **kwargs)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 969, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "c:\python38\lib\site-packages\django\db\models\sql\query.py", line 1358, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "c:\python38\lib\site-packages\django\db\models\sql\query.py", line 1377, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "c:\python38\lib\site-packages\django\db\models\sql\query.py", line 1255, in build_filter
+    arg, value = filter_expr
+ValueError: too many values to unpack (expected 2)
+2021-03-11 16:02:31,688 django.server ERROR    "GET /download/show_asin_task HTTP/1.1" 500 104526
+2021-03-11 16:03:55,789 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 155, in show_asin_task
+    logger.worker.warning(t.ASIN_Name_List + "Status changed")
+UnboundLocalError: local variable 't' referenced before assignment
+2021-03-11 16:03:55,793 django.server ERROR    "GET /download/show_asin_task HTTP/1.1" 500 70649
+2021-03-11 16:19:37,521 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "C:\Local\Work\Web\web\amazon\download\apscheduler_handle.py", line 113, in handle_scrapy_start
+    self.process.start(False)
+  File "c:\python38\lib\site-packages\scrapy\crawler.py", line 327, in start
+    reactor.run(installSignalHandlers=False)  # blocking call
+  File "c:\python38\lib\site-packages\twisted\internet\base.py", line 1282, in run
+    self.startRunning(installSignalHandlers=installSignalHandlers)
+  File "c:\python38\lib\site-packages\twisted\internet\base.py", line 1262, in startRunning
+    ReactorBase.startRunning(self)
+  File "c:\python38\lib\site-packages\twisted\internet\base.py", line 763, in startRunning
+    raise error.ReactorAlreadyRunning()
+twisted.internet.error.ReactorAlreadyRunning
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 198, in show_asin_task
+    scheduler.handle_scrapy_start(scrapy_data)
+  File "C:\Local\Work\Web\web\amazon\download\apscheduler_handle.py", line 116, in handle_scrapy_start
+    logger.info("already run")
+AttributeError: 'Logger' object has no attribute 'info'
+2021-03-11 16:19:37,528 django.server ERROR    "POST /download/show_asin_task HTTP/1.1" 500 97927
+2021-03-11 23:41:18,984 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 198, in show_asin_task
+    scheduler.handle_scrapy_start(scrapy_data)
+  File "C:\Local\Work\Web\web\amazon\download\apscheduler_handle.py", line 102, in handle_scrapy_start
+    self.scheduler.add_job(self.process.crawl, args=[StackSpider,asin_list])
+NameError: name 'asin_list' is not defined
+2021-03-11 23:41:19,001 django.server ERROR    "POST /download/show_asin_task HTTP/1.1" 500 76831
+2021-03-11 23:43:08,006 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 198, in show_asin_task
+    scheduler.handle_scrapy_start(scrapy_data)
+  File "C:\Local\Work\Web\web\amazon\download\apscheduler_handle.py", line 106, in handle_scrapy_start
+    self.scheduler.add_job(self.process.crawl, args=[StackSpider,asin_list])
+NameError: name 'asin_list' is not defined
+2021-03-11 23:43:08,016 django.server ERROR    "POST /download/show_asin_task HTTP/1.1" 500 76930
+2021-03-11 23:45:49,844 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 207, in show_asin_task
+    context=load_asin_json(asin_list,context)
+  File "C:\Local\Work\Web\web\amazon\download\asin_json_process.py", line 56, in load_asin_json
+    dict=json_lib.load_json(file)
+  File "C:\Local\Work\Python\PyLib\json_lib.py", line 24, in load_json
+    with open(file_name, encoding='utf-8', mode="r") as file:
+FileNotFoundError: [Errno 2] No such file or directory: 'download\\json_result\\B08DDZZRJF.json'
+2021-03-11 23:45:49,856 django.server ERROR    "POST /download/show_asin_task HTTP/1.1" 500 80821

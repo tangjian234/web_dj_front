@@ -1,0 +1,14 @@
+
+<h2>Choices</h2>
+<ul>
+  {% for choice in choice_list %}
+  <li>
+    
+    <h2>{{ choice.question.question_text }}</h2>
+    <h2>{{ choice.choice_text }}</h2>
+  </li>
+  <li>
+    <h3>{{choice.vote}}</h3>
+  </li>
+  {% endfor %}
+</ul>

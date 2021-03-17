@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+
+{% block sidebar %}
+  <ul class="sidebar-nav">
+    <li><a href="{% url 'index' %}">Home</a></li>
+    <li><a href="">All books -</a></li>
+    <li><a href="">All authors</a></li>
+  </ul>
+{% endblock %}
+
+
+{% block content %}
+
+  <p> </p> <p> </p>
+  <div>
+      <!--search form : -->
+    <form class="form my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    
+  </form>
+    
+  <h1> {{ head_title }}</h1>
+  <p>Welcome to LocalLibrary, a website developed by <em>Mozilla Developer Network</em>!</p>
+  <h2>Dynamic content</h2>
+  <ul>
+    <li><strong>ASIN Request:</strong> {{ num_Request }}</li>
+  </ul>  
+  
+  </div>
+   </div>
+      <!--search form : -->
+    <form class="form my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    
+    </form>
+  </div>
+
+{% endblock %}

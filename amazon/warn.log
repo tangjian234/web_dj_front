@@ -1,0 +1,14 @@
+2021-03-11 09:20:52,755 - download.apscheduler_handle - WARNING - ----------------->DEBUGTrue
+2021-03-11 09:21:35,571 - download.apscheduler_handle - WARNING - ----------------->DEBUGTrue
+2021-03-11 09:21:43,378 - download.apscheduler_handle - WARNING - ----------------->DEBUGTrue
+2021-03-11 09:24:50,586 - download.apscheduler_handle - WARNING - ----------------->DEBUGTrue
+2021-03-11 09:29:22,109 - download.apscheduler_handle - WARNING - ----------------->DEBUGTrue
+2021-03-11 09:30:16,408 - download.apscheduler_handle - WARNING - ----------------->DEBUGTrue
+2021-03-11 09:34:24,463 - download.apscheduler_handle - WARNING - [---------------------My job is done------------------------
+2021-03-11 14:56:34,321 - __main__ - WARNING - hello
+"[log_lib.py:67 -              warning() ] hello"
+"[log_lib.py:69 -             <module>() ] hello"
+"[log_lib.py:68 -                test1() ] hello"
+"[log_lib.py:68 -                test1() ] hello"
+"2021-03-11 15:12:10 [log_lib.py:68 -                test1() ] hello"
+"2021-03-11 15:12:53 [log_lib.py:68 -                test1() ] hello"

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block content-show %}
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>ASIN_id</th>
+				<th>ASIN_Title</th>
+				<th>ASIN_Price</th>
+				<th>ASIN_BSR</th>
+			</tr>
+		</thead>show
+    <tbody>
+			<tr>
+      	<td>{{ID}}</td>
+        <td>{{Title}}</td>
+        <td>{{Price}}</td>
+        <td>{{Bsr}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>  
+{% endblock %}

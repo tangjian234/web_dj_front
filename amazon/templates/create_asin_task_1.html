@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block content_create_asin_task %}
+
+<div class="container-fluid">
+
+  <h2> {{ head_title }}</h2>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header d-flex align-items-center">
+          <h4>Basic Form</h4>
+        </div>
+        <div class="card-body">
+          <p>Create ASIN Task </p>
+          <form name="myForm" ,id="myForm" method="post">
+            {% csrf_token %}
+            {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+            <div class="form-group">
+              {{ field.label_tag }}
+              {% render_field field class="form-control" %}
+              {% if field.help_text %}
+              <small class="form-text text-muted">{{ field.help_text }}</small>
+              {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary show-toast" id="myBtn">Submit</button>
+          </form>
+          <button type="button" class="btn btn-primary" id="myBtn">Show Toast</button>
+
+          <div class="toast" data-autohide="false">
+            <div class="toast-header">
+              Toast Header
+            </div>
+            <div class="toast-body">
+              Some text inside the toast body
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+</div>
+<script>
+  $(document).ready(function () {
+    $("#myBtn").click(function () {
+      $('.toast').toast('show');
+    });
+  });
+</script>
+
+
+
+{% endblock %}

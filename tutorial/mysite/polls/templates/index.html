@@ -1,0 +1,15 @@
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+{% if last_entries %}
+    <ul>
+    {% for question in last_entries %}
+        <li><a href= {% url 'polls:detail-1' question.id %}>{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+

@@ -1,0 +1,191 @@
+ {% extends "base.html" %}
+
+ {% block content-show_asin_task %}
+ {% load static %}
+ <section class="dashboard-header section-padding">
+   <div class="container-fluid">
+     <!-- Row : 1  :  Task Table   -->
+     <div class="row d-flex align-items-md-stretch">
+       <!-- Table  -->
+       <div class="col-lg-8 col-md-12 flex-lg-last flex-md-first align-self-baseline">
+         <div class="card">
+           <div class="card-header">
+             <h2>Task list</h2>
+           </div>
+           <div class="card-body">
+             <div class="table-responsive">
+               <table class="table table-striped table-hover">
+                 <thead>
+                   <tr>
+                     <!-- row number -->
+                     <th>#</th>
+                     <!-- <th>ASIN_task_id</th>  -->
+                     <th>ASIN_Name_List</th>
+                     <th>Status</th>
+                     <th>ASIN_Start_Time</th>
+                     <th>ASIN_End_time</th>
+                     <th>Action</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   {% for item in all_objects %}
+                   <tr>
+                     <!-- row number -->
+                     <td scope="row">{{ forloop.counter }}</td>
+                     <!-- asin name list -->
+                     <td>
+                       {{item.ASIN_Name_List}}
+                     </td>
+                     <!-- asin task Status  -->
+                     <td>
+                       {% if "Complete" == item.Request_Status  %}
+                       <button class="btn btn-success" type="button">Completed</button>
+                       {% endif %}
+                       {% if "Ongoing" == item.Request_Status  %}
+                       <button class="btn btn-success" type="button">Ongoing</button>
+                       {% endif %}
+                       {% if "Ready" == item.Request_Status  %}
+                       <button class="btn btn-dark" type="button">Ready</button>
+                       {% endif %}
+                     </td>
+                     <!-- asin task Start end time   -->
+                     <td>{{item.Start_Time}}</td>
+                     <td>{{item.End_Time}}</td>
+
+                     <td>
+                       <!-- asin task Start end time   -->
+
+                       <!-- submit the  form inform : -->
+                       <form method="POST">
+                         {% csrf_token %}
+                         <button class="btn btn-primary" type="Submit" name="run-id" value="{{item.pk}}">Run</button>
+                         <button class="btn btn-primary" type="Submit" name="modify-id"
+                           value="{{item.pk}}">Modify</button>
+                         <!-- 
+                           delete Func : delete_pk = request.POST.get("delete-id") = item.pk
+                          -->
+                         <button class="btn btn-primary" type="Submit" name="delete-id"
+                           value="{{item.pk}}">Delete</button>
+
+                         <button class="btn btn-primary" type="Submit" name="plot-id" value="{{item.pk}}">Plot</button>
+
+                       </form>
+                     <td>
+
+                   </tr>
+                   {% endfor %}
+                 </tbody>
+               </table>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+     <!-- Row : 2  : Key Product Comparsion Table   -->
+
+     <div class="row d-flex align-items-md-stretch">
+       <div class="col-lg-8 col-md-12 flex-lg-last flex-md-first align-self-baseline">
+         <div class="card">
+           <div class="card-header">
+             <h2>Product Comparision</h2>
+           </div>
+           <div class="card-body">
+             <div class="table-responsive">
+               <table class="table table-striped table-hover">
+                 <thead>
+                   <tr>
+                     <!-- row number -->
+                     <th>#</th>
+                     <!-- <th>ASIN_task_id</th>  -->
+                     <th>ASIN_Name</th>
+                     <th>Status</th>
+                     <th>Price</th>
+                     <th>Number Of comment</th>
+                     <th>Ranking</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+
+                   <tr>
+                     <td scope="row">{{ forloop.counter }}</td>
+                     <td>{{asin_string_1}}</td>
+                     <td>READY</td>
+                     <td>{{price_1}}</td>
+                     <td>{{no_of_comments_first_1}}</td>
+                   </tr>
+                   <tr>
+                     <td scope="row">{{ forloop.counter }}</td>
+                     <td>{{asin_string_2}}</td>
+                     <td>READY</td>
+                     <td>{{price_2}}</td>
+                     <td>{{no_of_comments_first_2}}</td>
+                   </tr>
+                 </tbody>
+               </table>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+     <!-- Row : 3  :     -->
+     <div class="row d-flex align-items-md-stretch">
+       <!-- Line Chart : 2 product comparision    -->
+
+       <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
+         <p>{{ x_axis  | json_script:"x_axis"}}</p>
+         <p>{{ asin_string_1  | json_script:"asin_string_1"}}</p>
+         <p>{{ asin_string_2  | json_script:"asin_string_2"}}</p>
+         <p>{{ price_string_1  | json_script:"price_line_1"}}</p>
+         <p>{{ price_string_2  | json_script:"price_line_2"}}</p>
+         <div class="card sales-report">
+           <h2 class="display h4">Sales report</h2>
+           <p> Price Comparision of 2 ASIN product-1 </p>
+           <div class="line-chart">
+             <canvas id="2_Product_Price_Comparision"></canvas>
+           </div>
+         </div>
+       </div>
+       <!-- Line Chart : 2 product no of comment     -->
+       <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
+         <p>{{ x_axis  | json_script:"x_axis"}}</p>
+         <p>{{ asin_string_1  | json_script:"asin_string_1"}}</p>
+         <p>{{ asin_string_2  | json_script:"asin_string_2"}}</p>
+         <p>{{ no_of_comments_string_1  | json_script:"no_of_comments_string_1"}}</p>
+         <p>{{ no_of_comments_string_2  | json_script:"no_of_comments_string_2"}}</p>
+         <div class="card sales-report">
+           <h2 class="display h4">Sales report</h2>
+           <p> Comment Comparision of 2 ASIN product-1 </p>
+           <div class="line-chart">
+             <canvas id="2_Product_Comment_Comparision"></canvas>
+           </div>
+         </div>
+       </div>
+
+     </div>
+
+     <!-- Row : 4  :    -->
+     <div class="row d-flex align-items-md-stretch">
+       <!-- Radar Chart :  radarChartExample   -->
+       <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
+         <p>{{ asin_string_1  | json_script:"asin_string_1"}}</p>
+         <p>{{ asin_string_2  | json_script:"asin_string_2"}}</p>
+         <div class="card radar-chart-example">
+           <div class="card-header d-flex align-items-center">
+             <h4>Bluetooth Feature Radar Chart</h4>
+           </div>
+           <div class="card-body">
+             <div class="chart-container">
+               <canvas id="radarChartExample"></canvas>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+
+
+   </div>
+ </section>
+ {% endblock %}
