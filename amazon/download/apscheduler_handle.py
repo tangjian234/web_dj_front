@@ -102,34 +102,41 @@ class scrapy_scheduler:
           <scrapy_data>: data dictionary that contain task_id
     """
     try : 
+      """ Set start and end time  """  
       start=datetime.now()
       end=start+ timedelta(seconds=32)
       #end=start+ timedelta(hours=10)
       
-      ##### add_job
-      # stack_spider
-      
+      """  Transfer parameter  """        
       #     use task_id to transfer pk 
       #     use asin_list to transfer list of asin input 
       self.task_id=scrapy_data['task_id']
       asin_list=scrapy_data['asin_list']
-      ## run once now 
-
-      self.scheduler.add_listener(self.job_completed,  EVENT_JOB_EXECUTED | EVENT_JOB_ERROR)
-
-      #self.scheduler.add_job(self.process.crawl, args=[StackSpider,asin_list])
-      self.job_complete_status[self.task_id] = False
       
+      """  Add listener   """  
+      self.scheduler.add_listener(self.job_completed,  EVENT_JOB_EXECUTED | EVENT_JOB_ERROR)
+      self.job_complete_status[self.task_id] = False
 
-      ## run periodicity add crawl job to scheduler. 
+      """StackSpider    """          
+      # add crawl job to scheduler. 
+      
+      ## StackSpider : run once now 
+      #self.scheduler.add_job(self.process.crawl, args=[StackSpider,asin_list])
+      
+      ## StackSpider:  run periodicity 
       self.scheduler.add_job(self.process.crawl, 'interval', args=[StackSpider], seconds=20,next_run_time=datetime.now(),start_date = start,end_date=end )
       
-
-      ## amazon_download
-      #self.scheduler.add_job(self.process.crawl, args=[Download_Test,asin_list])            
+      """ amazon_download   """  
+      """ // MARK :  amazon_download :  run once now"""
+      OUTPUT_DIR='C:/Local/Work/Python/PyLib/scrapy/download/result/'
+      #  : amazon_download :  run once now       
+      #self.scheduler.add_job(self.process.crawl, args=[Download_Test,asin_list,OUTPUT_DIR])            
+      
+      ## amazon_download : run periodicity 
       #self.scheduler.add_job(self.process.crawl, 'interval', args=[Download_Test], hours=1,
       #next_run_time=datetime.now(),start_date = start,end_date=end )
       
+      """ Kick start the craw process    """  
       
       self.process.start(False) 
       #self.process.start(stop_after_crawl=True) 
