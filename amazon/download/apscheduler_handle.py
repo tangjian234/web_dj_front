@@ -124,13 +124,13 @@ class scrapy_scheduler:
       #self.scheduler.add_job(self.process.crawl, args=[StackSpider,asin_list])
       
       ## StackSpider:  run periodicity 
-      self.scheduler.add_job(self.process.crawl, 'interval', args=[StackSpider], seconds=20,next_run_time=datetime.now(),start_date = start,end_date=end )
+      #self.scheduler.add_job(self.process.crawl, 'interval', args=[StackSpider], seconds=20,next_run_time=datetime.now(),start_date = start,end_date=end )
       
       """ amazon_download   """  
       """ // MARK :  amazon_download :  run once now"""
       OUTPUT_DIR='C:/Local/Work/Python/PyLib/scrapy/download/result/'
       #  : amazon_download :  run once now       
-      #self.scheduler.add_job(self.process.crawl, args=[Download_Test,asin_list,OUTPUT_DIR])            
+      self.scheduler.add_job(self.process.crawl, args=[Download_Test,asin_list,OUTPUT_DIR])            
       
       ## amazon_download : run periodicity 
       #self.scheduler.add_job(self.process.crawl, 'interval', args=[Download_Test], hours=1,
