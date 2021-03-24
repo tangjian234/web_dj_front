@@ -20,6 +20,31 @@ Parameters :
 
 """
 from json import dumps
+
+
+""" // MARK : create_result_json """
+# See Package N : Task Result file design 
+
+def create_task_result_json(asin_list,context): 
+  dict={
+    # 1. Meta data : Same as task model data
+    
+    "Meta_data":{
+      "task_id":context["task_id"],
+      "start_time":context["start_time"],
+      "end_time":context["end_time"],
+      "asin_list":context["asin_list"]
+      },
+    # 2. Invariant part of listing : 
+      "Invariant_data":{},
+      "Variant_data":{},
+      } 
+
+
+  print(dict)
+
+
+
 """ // MARK : load_asin_json """
 def load_asin_json(asin_list,context):
   
@@ -188,3 +213,6 @@ def read_asin_json(asin_list,context):
 
 
 
+if __name__ == '__main__':
+  create_task_result_json("B1")
+    
