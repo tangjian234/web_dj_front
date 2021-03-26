@@ -11,7 +11,7 @@ $(document).ready(function() {
         // Line Chart 
         // ------------------------------------------------------ //
 
-
+        x
         // Get data from django show_asin_task.html 
         // asin_list and asin_dict_list
         var asin_list = JSON.parse(document.getElementById('asin_list').textContent);

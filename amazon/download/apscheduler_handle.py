@@ -93,6 +93,7 @@ class scrapy_scheduler:
       DjangoJobExecution.objects.delete_old_job_executions(max_age)
 
   """ // MARK :  handle_scrapy_start"""
+  
   def handle_scrapy_start(self,scrapy_data):
     """ Main function : 
       1. add crawl job to scheduler. 
@@ -104,9 +105,10 @@ class scrapy_scheduler:
     try : 
       """ Set start and end time  """  
       start=datetime.now()
-      end=start+ timedelta(seconds=32)
+      end=start+ timedelta(seconds=22)
       #end=start+ timedelta(hours=10)
-      
+      logger.worker.warning(scrapy_data)
+
       """  Transfer parameter  """        
       #     use task_id to transfer pk 
       #     use asin_list to transfer list of asin input 
@@ -130,11 +132,11 @@ class scrapy_scheduler:
       """ // MARK :  amazon_download :  run once now"""
       OUTPUT_DIR='C:/Local/Work/Python/PyLib/scrapy/download/result/'
       #  : amazon_download :  run once now       
-      self.scheduler.add_job(self.process.crawl, args=[Download_Test,asin_list,OUTPUT_DIR])            
+      #self.scheduler.add_job(self.process.crawl, args=[Download_Test,scrapy_data,OUTPUT_DIR])            
       
       ## amazon_download : run periodicity 
-      #self.scheduler.add_job(self.process.crawl, 'interval', args=[Download_Test], hours=1,
-      #next_run_time=datetime.now(),start_date = start,end_date=end )
+      self.scheduler.add_job(self.process.crawl, 'interval', args=[Download_Test,scrapy_data,OUTPUT_DIR], seconds=8,
+      next_run_time=datetime.now(),start_date = start,end_date=end )
       
       """ Kick start the craw process    """  
       

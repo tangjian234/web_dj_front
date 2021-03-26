@@ -3,7 +3,8 @@ import string_lib
 import json_lib
 import logging
 import pathlib
-logger = logging.getLogger(__name__)
+
+#logger = logging.getLogger(__name__)
 
 """
 Function :  
@@ -21,29 +22,36 @@ Parameters :
 """
 from json import dumps
 
+from log_lib import Logger
+logger = Logger()
 
 """ // MARK : create_result_json """
 # See Package N : Task Result file design 
-
-def create_task_result_json(asin_list,context): 
-  dict={
+import json
+def create_task_result_json(scrapy_data): 
+  """
+  scrapy_data['result_dict']={
     # 1. Meta data : Same as task model data
     
     "Meta_data":{
-      "task_id":context["task_id"],
-      "start_time":context["start_time"],
-      "end_time":context["end_time"],
-      "asin_list":context["asin_list"]
+      "task_id":scrapy_data["task_id"],
+      "start_time":scrapy_data["start_time"],
+      "end_time":scrapy_data["end_time"],
+      "asin_list":scrapy_data["asin_list"]
       },
     # 2. Invariant part of listing : 
       "Invariant_data":{},
       "Variant_data":{},
-      } 
+      }
+  """
+  scrapy_data['result_dict']={"a":1}
+  #print(type(scrapy_data['result_dict']))
+  
+  #print(scrapy_data)
+  #logger.worker.warning(json.dumps(scrapy_data))
+  logger.worker.warning(scrapy_data)
 
-
-  print(dict)
-
-
+  return(scrapy_data)
 
 """ // MARK : load_asin_json """
 def load_asin_json(asin_list,context):
@@ -131,8 +139,8 @@ def load_asin_json(asin_list,context):
     
     asin_dict_list[asin]= asin_dict
 
-    logger.warning('no_of_comments')
-    logger.warning(no_of_comments)
+    #logger.warning('no_of_comments')
+    #logger.warning(no_of_comments)
 
 
   context['asin_dict_list']=asin_dict_list  

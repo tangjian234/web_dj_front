@@ -23,12 +23,13 @@ from bootstrap_datepicker_plus import DatePickerInput
 
 
 
-from .asin_json_process import load_asin_json
+from .asin_json_process import load_asin_json,create_task_result_json
 from .apscheduler_handle import scrapy_scheduler
 
 ####### create logger
 from log_lib import Logger
 logger = Logger()
+
  
 ####### create scrapy scheduler object 
 scheduler = scrapy_scheduler()
@@ -197,8 +198,8 @@ def show_asin_task(request):
     all_objects = ASIN_task.objects.all()
  
     context = {'all_objects': all_objects}
-    
     logger.worker.warning('log in show asin-0!')
+    print('log - in show asin-0!')
 
     # Will run GET if reload, Get means reload 
     if request.method == 'GET':      
@@ -243,6 +244,11 @@ def show_asin_task(request):
 
             scrapy_data['asin_list'] =asin_list
             scrapy_data['task_id'] =run_pk
+            #scrapy_data['start_time']=entry.Start_Time
+            #scrapy_data['end_time']=entry.End_Time
+            
+            #scrapy_data=create_task_result_json(scrapy_data)
+
 
             # transfer asin list and task id into scheduler s
             scheduler.handle_scrapy_start(scrapy_data)
