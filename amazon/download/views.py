@@ -19,7 +19,7 @@ from background_task import background
 from .models import Person
 
 import django.dispatch
-from bootstrap_datepicker_plus import DatePickerInput
+from bootstrap_datepicker_plus import DatePickerInput,DateTimePickerInput
 
 
 
@@ -244,8 +244,11 @@ def show_asin_task(request):
 
             scrapy_data['asin_list'] =asin_list
             scrapy_data['task_id'] =run_pk
-            #scrapy_data['start_time']=entry.Start_Time
-            #scrapy_data['end_time']=entry.End_Time
+            
+            
+            # scrapy_data['start_time']=entry.Start_Time
+            # scrapy_data['start_time']=entry.Start_Time
+            # scrapy_data['end_time']=entry.End_Time
             
             #scrapy_data=create_task_result_json(scrapy_data)
 
