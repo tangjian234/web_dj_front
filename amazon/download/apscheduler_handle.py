@@ -121,7 +121,8 @@ class scrapy_scheduler:
 
       """StackSpider    """          
       # add crawl job to scheduler. 
-      
+
+
       ## StackSpider : run once now 
       #self.scheduler.add_job(self.process.crawl, args=[StackSpider,asin_list])
       
