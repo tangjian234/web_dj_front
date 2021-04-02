@@ -5,6 +5,8 @@ from django.db import models
 
 from datetime import datetime,date
 from django.db.models import signals
+from datetime import timedelta
+
 # E:\home\pi\pylib
 # import string_lib
 # import string
@@ -63,9 +65,10 @@ class ASIN_task(models.Model):
 
   ASIN_Name_List = models.CharField(max_length=63, default="a1-")
   Request_Description = models.CharField(max_length=63, default="b1-")
-  Start_Time = models.DateField(default=date.today)  # starting date: default today.
+  Start_Time = models.DateTimeField(default=datetime.now)  # starting date: default today.
   # end data : default date : default 3
-  End_Time = models.DateField(default=datetime.now)
+  Interval=models.DurationField(default=timedelta(seconds=5))
+  End_Time = models.DateTimeField(default=datetime.now)
   Request_Status = models.CharField(max_length=63,choices=STATUS_CHOICES)
  
 class ASIN_Search_task(models.Model):
@@ -89,9 +92,9 @@ class ASIN_Search_task(models.Model):
 
   ASIN_Search_List = models.CharField(max_length=63, default="a1-")
   Number_Of_Result = models.IntegerField(default=10,choices=NUMBER_CHOICES)
-  Start_Time = models.DateField(default=date.today)  # starting date: default today.
+  Start_Time = models.DateTimeField(default=datetime.now)  # starting date: default today.
   # end data : default date : default 3
-  End_Time = models.DateField(default=datetime.now)
+  End_Time = models.DateTimeField(default=datetime.now)
   Request_Status = models.CharField(max_length=63,choices=STATUS_CHOICES) 
  
 # test

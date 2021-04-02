@@ -78,7 +78,7 @@ ALLOWED_HOSTS = ['jian', '73.254.182.128', '127.0.0.1']
                   
 # Application definition 
 
-INSTALLED_APPS = ['download', 'crispy_forms', 'bootstrap4','celery','background_task','bootstrap_datepicker_plus',
+INSTALLED_APPS = ['download', 'crispy_forms', 'bootstrap4','celery','background_task','bootstrap_datepicker_plus','durationwidget',
                   'django.contrib.admin',
                   'django.contrib.auth',
                   'django.contrib.contenttypes',

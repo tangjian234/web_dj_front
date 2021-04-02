@@ -104,8 +104,12 @@ class scrapy_scheduler:
     """
     try : 
       """ Set start and end time  """  
-      start=datetime.now()
-      end=start+ timedelta(seconds=22)
+      """ //TODO  : replace with actual input from create form   """  
+
+      local_start= datetime.now()
+      local_end=local_start+ timedelta(seconds=60)
+      local_interval = 8  # in seconds
+
       #end=start+ timedelta(hours=10)
       logger.worker.warning(scrapy_data)
 
@@ -136,8 +140,8 @@ class scrapy_scheduler:
       #self.scheduler.add_job(self.process.crawl, args=[Download_Test,scrapy_data,OUTPUT_DIR])            
       
       ## amazon_download : run periodicity 
-      self.scheduler.add_job(self.process.crawl, 'interval', args=[Download_Test,scrapy_data,OUTPUT_DIR], seconds=8,
-      next_run_time=datetime.now(),start_date = start,end_date=end )
+      self.scheduler.add_job(self.process.crawl, 'interval', args=[Download_Test,scrapy_data,OUTPUT_DIR], seconds=local_interval,
+      next_run_time=datetime.now(),start_date = local_start,end_date=local_end )
       
       """ Kick start the craw process    """  
       

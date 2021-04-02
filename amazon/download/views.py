@@ -20,6 +20,7 @@ from .models import Person
 
 import django.dispatch
 from bootstrap_datepicker_plus import DatePickerInput,DateTimePickerInput
+from durationwidget.widgets import TimeDurationWidget
 
 
 
@@ -59,14 +60,14 @@ class ASIN_Search_task_form(forms.ModelForm):
 
     def __init__(self, *args, **kwargs): 
       super(ASIN_Search_task_form, self).__init__(*args, **kwargs)
-      start= datetime.date.today()
-      end = start + datetime.timedelta(days = 1)
+      #start= datetime.date.today()
+      #end = start + datetime.timedelta(days = 1)
       self.fields['ASIN_Search_List'].initial  = 'Bluetooth Headset'
       self.fields['Number_Of_Result'].initial  = 20
-      self.fields['Start_Time'].initial  = start
-      self.fields['End_Time'].initial  = end
+      #self.fields['Start_Time'].initial  = start
+      #self.fields['End_Time'].initial  = end
       self.fields['Request_Status'].initial  = 'Ready'
-    
+    	# B07QDPRYYD; B088BHYN1M
     # specify the name of model to use
     class Meta:
         model = ASIN_Search_task
@@ -74,8 +75,8 @@ class ASIN_Search_task_form(forms.ModelForm):
         widgets = { 
           'ASIN_Search_List': forms.TextInput(attrs={'placeholder':'Bluetooth Headset'}),
           'Number_Of_Result': forms.Select(choices=NUMBER_CHOICES),
-          'Start_Time': DatePickerInput(),
-          'End_Time': DatePickerInput(),
+          'Start_Time': DateTimePickerInput(),
+          'End_Time': DateTimePickerInput(),
         }
 
 # forms/widgets
@@ -85,12 +86,12 @@ class ASIN_task_form(forms.ModelForm):
     
     def __init__(self, *args, **kwargs): 
       super(ASIN_task_form, self).__init__(*args, **kwargs)
-      start= datetime.date.today()
-      end = start + datetime.timedelta(days = 1)
+      #start= datetime.date.today()
+      #end = start + datetime.timedelta(days = 1)
       self.fields['ASIN_Name_List'].initial  = 'B08DDZZRJF'
       self.fields['Request_Description'].initial  = 'Download list of ASIN Periodicly, ASIN serperated by ;  '
-      self.fields['Start_Time'].initial  = start
-      self.fields['End_Time'].initial  = end
+      #self.fields['Start_Time'].initial  = start
+      #self.fields['End_Time'].initial  = end
       self.fields['Request_Status'].initial  = 'Ready'
     
     # specify the name of model to use
@@ -100,14 +101,10 @@ class ASIN_task_form(forms.ModelForm):
         widgets = { 
           'ASIN_Name_List': forms.TextInput(attrs={'placeholder':'ASINAS'}),
           'Request_Status': forms.Select(choices=STATUS_CHOICES),
-          'Start_Time': DatePickerInput(),
-          'End_Time': DatePickerInput(),
+          'Start_Time': DateTimePickerInput(),
+          'Interval':TimeDurationWidget(),
+          'End_Time': DateTimePickerInput(),
         }
-
-        # hide a form fields
-
-
-        # widgets = {'Request_Status': forms.HiddenInput()}
 
 # <!--------------------------------------------------->
 """// MARK : Create_asin_task """
@@ -504,9 +501,9 @@ Parameters :
    : 
    : 
 """
+import dict_lib
 def show_asin_detail(request):
-    data = {}
-    data = {}
+    data = dict_lib.create_dict()
     context = {
         'ID': data["ASIN"],
         'Title': data["title"],
