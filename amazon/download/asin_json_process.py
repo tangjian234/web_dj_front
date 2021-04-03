@@ -108,6 +108,7 @@ def process_bsr(bsr_download):
       bsr[i]['rank']=bsr_download[i][0]  
   return(bsr)
 
+from pathlib import Path
 
 """ // MARK : SECTION 2 : Process downloaded asin_file by asin download spider  """
 bsr_ranking = namedtuple('bsr_ranking',['category','rank'])
@@ -125,7 +126,8 @@ def process_asin_json_files(task_id,context):
   # Create the file : 
   #download_output_list = "download_output_list_"+task_id+".txt"
   #target_file_name = "master_" + task_id+".json"
-  download_output_list = "download_output_list"+task_id+".txt"
+  #"download_output_list"+task_id+".txt" 
+  download_output_list = Path('C:\Local\Work\Python\PyLib\scrapy\download\result') / 'download_output_list.txt'
   target_file_name = "master" + task_id+".json"
 
   file_list=load_lines(download_output_list)
