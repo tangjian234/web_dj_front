@@ -57,9 +57,10 @@ def process_price(price_download):
 
   if type(price_download) is list:
      price = list(filter(lambda var : '$' in var, price_download))[-1]
+     price=price.replace("$","")
   else: 
     # default value 
-    price='$0.0'   
+    price='0.0'   
   return(price)
 
 def process_rating(rating_download):
@@ -127,10 +128,14 @@ def process_asin_json_files(task_id,context):
   #download_output_list = "download_output_list_"+task_id+".txt"
   #target_file_name = "master_" + task_id+".json"
   #"download_output_list"+task_id+".txt" 
-  download_output_list = Path('C:\Local\Work\Python\PyLib\scrapy\download\result') / 'download_output_list.txt'
-  target_file_name = "master" + task_id+".json"
+  download_output_list = Path(r'C:\Local\Work\Python\PyLib\scrapy\download\result\download_output_list-'+task_id+'.txt')
+  print("Line No,:",log_lib.get_line_number(),download_output_list )
+  target_file_name = Path(r"C:\Local\Work\Python\PyLib\scrapy\download\result\master_" + task_id+".json")
+  print("Line No,:",log_lib.get_line_number(),target_file_name )
 
+  
   file_list=load_lines(download_output_list)
+  print("Line No,:",log_lib.get_line_number(),file_list)
   # Create dict to replace dict={} : dictionary of dictionaries 
   
   s=dict_lib.create_dict()
@@ -141,7 +146,7 @@ def process_asin_json_files(task_id,context):
     #ftime=string_lib.get_mid_string_in_between(fname, "__",".json")
     #asin=fname.split("\\")[-1].split("__")[0]
     # Way 2 : regex  
-    p=".*\\\\(.*)__(.*--.*).json"
+    p=".*/(.*)__(.*--.*).json"
     #only have one match 
     (asin,download_time,)=re.findall(p,fname)[0]
 
@@ -156,6 +161,7 @@ def process_asin_json_files(task_id,context):
   # Rearrange and compression 
   # Seperate into invariant one : feature_list etc and variant ones ,  
   invariant_list=['ASIN','title','feature_list','producer','brand','date_first_available']
+  context['asin_list']= list(s.keys())
   
   for asin in s.keys():
       first_time=list(s[asin].keys())[0]
@@ -173,6 +179,8 @@ def process_asin_json_files(task_id,context):
           s[asin][t]['best_seller_rank']=process_bsr(s[asin][t]['best_seller_rank'])          
           s[asin][t]['no_of_comments']=process_comment(s[asin][t]['no_of_comments']) 
           s[asin][t]['rating']=process_rating(s[asin][t]['rating']) 
+  print("Line No,:",log_lib.get_line_number(),s)
+  write_json(s,target_file_name)
 
       #price=[s[t]["price"] for t in s[asin].keys() if '--' in t]
      
@@ -181,10 +189,11 @@ def process_asin_json_files(task_id,context):
 
   variant_list=['price','no_of_comments','rating']
   # mark TODO :'best_seller_rank'] hwo to process 
-  asin_dict_list=dict_lib.create_dict()
-
+  #asin_dict_list=dict_lib.create_dict()
+  asin_dict_list={}
   for asin in s.keys():     
-    asin_dict=dict_lib.create_dict()
+    #asin_dict=dict_lib.create_dict()
+    asin_dict={}
     for v in variant_list:
       # price 
       _=[s[asin][t][v] for t in s[asin].keys() if '--' in t]      
@@ -196,7 +205,6 @@ def process_asin_json_files(task_id,context):
   context['asin_dict_list']=asin_dict_list
   print("Line No,:",log_lib.get_line_number(),context['asin_dict_list'])
 
-  write_json(s,target_file_name)
   return(context)
 
 

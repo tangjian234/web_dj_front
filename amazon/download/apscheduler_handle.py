@@ -50,6 +50,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.events import EVENT_JOB_ERROR, EVENT_JOB_EXECUTED
 
 import os 
+import file_lib
 from pathlib import Path,PureWindowsPath 
 
 # Start logger  
@@ -155,13 +156,17 @@ class scrapy_scheduler:
       """ amazon_download   """  
       """ // MARK :  amazon_download :  run once now"""
       OUTPUT_DIR='C:/Local/Work/Python/PyLib/scrapy/download/result/'
+      download_output_list = Path(r'C:\Local\Work\Python\PyLib\scrapy\download\result\download_output_list-'+self.task_id+'.txt')
+      file_lib.clear_file(download_output_list)
+      
       #  : amazon_download :  run once now       
-      #self.scheduler.add_job(self.process.crawl, args=[Download_Test,scrapy_data,OUTPUT_DIR])            
+      self.scheduler.add_job(self.process.crawl, args=[Download_Test,scrapy_data,OUTPUT_DIR])            
       
       ## amazon_download : run periodicity 
+      """
       self.scheduler.add_job(self.process.crawl, 'interval', args=[Download_Test,scrapy_data,OUTPUT_DIR], seconds=local_interval,
       next_run_time=datetime.now(),start_date = local_start,end_date=local_end )
-      
+      """
       """ Kick start the craw process    """  
       
       self.process.start(False) 

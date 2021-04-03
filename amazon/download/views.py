@@ -45,7 +45,7 @@ from bootstrap_datepicker_plus import DatePickerInput,DateTimePickerInput
 from durationwidget.widgets import TimeDurationWidget
 
 
-from .asin_json_process import load_asin_json,create_task_result_json
+from .asin_json_process import load_asin_json,create_task_result_json,process_asin_json_files
 from .apscheduler_handle import scrapy_scheduler
 
 ####### create logger
@@ -290,8 +290,9 @@ def show_asin_task(request):
           asin_list=entry.ASIN_Name_List
           
           # Get asin_list and price data 
-          context=load_asin_json(asin_list,context)
-          print(context)
+          #context=load_asin_json(asin_list,context)
+          context=process_asin_json_files(plot_pk,context)
+          
     return render(request, 'show_asin_task.html', context)
     
 ## <!--------------------------------------------------->
