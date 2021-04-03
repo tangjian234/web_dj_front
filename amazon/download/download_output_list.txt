@@ -1,0 +1,4 @@
+C:\Local\Work\Python\PyLib\scrapy\download\result\B088BHYN1M__03-25-2021--06_50_01.json
+C:\Local\Work\Python\PyLib\scrapy\download\result\B088BHYN1M__03-25-2021--06_50_21.json    
+C:\Local\Work\Python\PyLib\scrapy\download\result\B07QDPRYYD__03-25-2021--06_50_03.json
+C:\Local\Work\Python\PyLib\scrapy\download\result\B07QDPRYYD__03-25-2021--06_50_22.json 

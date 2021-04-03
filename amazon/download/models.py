@@ -1,3 +1,19 @@
+#!/usr/bin/env python
+#------------------------------------------------------------------------>
+"""
+{Description}
+
+This model : model of django framework : define data
+
+{Classes} : asin download task
+  1. ASIN_task 
+  2. ASIN_Search_task
+
+{Methods} :  
+ 
+  __author__ : Jian tang 
+
+"""
 import enum
 import logging
 import uuid
@@ -7,13 +23,8 @@ from datetime import datetime,date
 from django.db.models import signals
 from datetime import timedelta
 
-# E:\home\pi\pylib
-# import string_lib
-# import string
 
-################
-
-
+""" // MARK :  SECTION 1 :  Define asin download task   """
 # The first element in each tuple is the actual value to be set on the model, and the second element is the human-readable name.
 # Status of a ASIN_TASK; it is a string 
 STATUS_CHOICES = [ 
@@ -36,6 +47,7 @@ NUMBER_CHOICES = [
     (9, 9), 
     (10, 10),
  ]
+
 class ASIN_task(models.Model):
   """
     <ASIN_task(models.Model): Main model for ASIN download task given a list of asin sperated by ;  
@@ -97,10 +109,7 @@ class ASIN_Search_task(models.Model):
   End_Time = models.DateTimeField(default=datetime.now)
   Request_Status = models.CharField(max_length=63,choices=STATUS_CHOICES) 
  
-# test
-# from datetime import date
-
-
+""" // MARK :  SECTION 2 :  Other models  """
 # <!------------------------------------------------------------------------->
 class Book(models.Model):
   book_id = models.CharField(max_length=20)

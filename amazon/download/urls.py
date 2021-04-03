@@ -1,3 +1,22 @@
+
+
+#!/usr/bin/env python
+
+#------------------------------------------------------------------------>
+"""
+{Description}
+
+This module : map views.py function and href link  
+
+{Classes} : 
+
+
+{Methods} :  
+ 
+  __author__ : Jian tang 
+
+"""
+#------------------------------------------------------------------------>
 from django.urls import path
 from .views import index, add_doc_info, input_asin, show_asin_detail, create_asin_task, show_asin_task, test_asin_task, background_view, person_view
 from django.conf.urls.static import static
@@ -23,7 +42,5 @@ urlpatterns = [
     #### direct call the function to display a simple result
     path('background_view', background_view, name='background_view'),
     path('person_view', person_view, name='person_view')
-
-
 
 ]

@@ -1,4 +1,23 @@
-# runapscheduler.py
+#!/usr/bin/env python
+
+#------------------------------------------------------------------------>
+"""
+{Description}
+
+This module 
+
+{Classes} : 
+
+
+{Methods} :  
+
+  1.  
+  
+  2.  
+
+  __author__ : Jian tang 
+"""
+#------------------------------------------------------------------------>
 
 ##### run stack_spider in different directory  
 import sys

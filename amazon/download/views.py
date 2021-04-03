@@ -1,3 +1,25 @@
+#!/usr/bin/env python
+
+#------------------------------------------------------------------------>
+"""
+{Description}
+
+This module : view of django framework : display data
+
+{Classes} : 
+
+
+{Methods} :  
+
+  1. ASIN_Search_task_form()
+  2. ASIN_task_form()
+  3. create_asin_task() 
+  4. show_asin_task()
+   
+  __author__ : Jian tang 
+
+"""
+#------------------------------------------------------------------------>
 
 
 import datetime
@@ -23,7 +45,6 @@ from bootstrap_datepicker_plus import DatePickerInput,DateTimePickerInput
 from durationwidget.widgets import TimeDurationWidget
 
 
-
 from .asin_json_process import load_asin_json,create_task_result_json
 from .apscheduler_handle import scrapy_scheduler
 
@@ -35,6 +56,11 @@ logger = Logger()
 ####### create scrapy scheduler object 
 scheduler = scrapy_scheduler()
 import datetime
+
+""" // MARK :  SECTION 1 : Forms Definitions : ASIN_Search_task_form,ASIN_task_form
+
+"""
+
 # <!------------------------------------------------------------------------->
 
 """ // MARK :  ASIN_Search_task_form """
@@ -106,7 +132,11 @@ class ASIN_task_form(forms.ModelForm):
           'End_Time': DateTimePickerInput(),
         }
 
-# <!--------------------------------------------------->
+""" // MARK :  SECTION 2 :  task management 
+create_asin_task
+show_asin_task
+"""
+
 """// MARK : Create_asin_task """
 def create_asin_task(request):
     """
@@ -270,6 +300,7 @@ def show_asin_task(request):
 ######## hhttps://docs.djangoproject.com/en/3.1/ref/models/querysets/
 ##### View
 
+""" // MARK :  SECTION 3 : Older function  """
 
 def person_view(request):
     logger = logging.getLogger(__name__)

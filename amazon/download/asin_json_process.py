@@ -1,12 +1,206 @@
- 
+#!/usr/bin/env python
+
+#------------------------------------------------------------------------>
+"""
+{Description}
+
+This module process asin download json file from scrappy asin downloader : quotes_spider
+
+{Classes} : 
+
+
+{Methods} :  
+
+  1. process_asin_json_files() :
+      Process downloaded asin_file by asin download spider, save into a master file  
+  
+  2. load_asin_json() : 
+      load the master file to visualize
+
+  __author__ : Jian tang 
+"""
+#------------------------------------------------------------------------>
+
 import string_lib
 import json_lib
 import logging
 import pathlib
 
-#logger = logging.getLogger(__name__)
+import utility_lib,time
+from json_lib import write_json  
+import json,os
+from file_lib import clear_file, add_string_to_file,load_lines
+from collections import namedtuple
+  
+import string_lib
+import re 
+import dict_lib 
+import collections_lib  
+import log_lib
+import json
+from json import dumps
+import dict_lib
 
-"""
+from log_lib import Logger
+logger = Logger()
+
+# Append JSON object to output file JSON array
+#  process price
+
+""" // MARK :  SECTION 1 : Processing and variant such as price and format them  """
+ 
+def process_price(price_download):
+  '''
+  {Format price}
+  Return : first of list of price with dollar sign in it. USD only. 
+  '''
+
+  if type(price_download) is list:
+     price = list(filter(lambda var : '$' in var, price_download))[-1]
+  else: 
+    # default value 
+    price='$0.0'   
+  return(price)
+
+def process_rating(rating_download):
+  '''
+  {Format rating}
+  Args : 
+     rating_download
+  Return : just number digit 
+  '''  
+  if type(rating_download) is list:
+    _=rating_download[-1]
+    # removal of word behind first space 
+    rating_download=re.sub('\s+.*','',_)
+  return(rating_download)
+
+def process_comment(no_comment_download):
+  '''
+  {Format no_comment_download}
+  Args : raw no_comment_download data 
+  Return : just number digit 
+  '''  
+  if type(no_comment_download) == str:
+    # removal of , 
+    _=no_comment_download.replace(",","")
+    # removal of word behind first space 
+    no_comment_download=re.sub('\s+.*','',_)
+  return(no_comment_download)
+
+def process_bsr(bsr_download):
+  '''
+  {Format best seller rank. return formated dictionary} 
+  Args : raw no_comment_download
+  Return : formated dictionary  
+  Example : dictionary  
+  {0: 'category':'ab', 
+      'rank':'30'  
+   1: 'category':'cd',       
+      'rank':'30'  
+  }
+  '''  
+  bsr_download=re.findall('#(\d+)\s+in([^#]+)',bsr_download) 
+  #list of matches in the format of [(group1: c1,r1),(c2,r2)]
+  bsr=dict_lib.create_dict()
+  for i in range(len(bsr_download)):
+      bsr[i]['category']=bsr_download[i][1]
+      bsr[i]['rank']=bsr_download[i][0]  
+  return(bsr)
+
+
+""" // MARK : SECTION 2 : Process downloaded asin_file by asin download spider  """
+bsr_ranking = namedtuple('bsr_ranking',['category','rank'])
+
+#def process_asin_json_files(download_output_list,master_file,task_id):  
+def process_asin_json_files(task_id,context):  
+  '''
+  {Process downloaded asin_file by asin download spider. Save into a master file}
+  Args    :
+    1. download_output_list:   
+    2. target_file_name :
+  Return  : context : full downloaded information 
+  Example : 
+  '''
+  # Create the file : 
+  #download_output_list = "download_output_list_"+task_id+".txt"
+  #target_file_name = "master_" + task_id+".json"
+  download_output_list = "download_output_list"+task_id+".txt"
+  target_file_name = "master" + task_id+".json"
+
+  file_list=load_lines(download_output_list)
+  # Create dict to replace dict={} : dictionary of dictionaries 
+  
+  s=dict_lib.create_dict()
+  for fname in file_list:
+    # Put all into dictionary indexed by ASIN and download time 
+    # fname example : C:\Local\Work\Python\PyLib\scrapy\download\result\B07QDPRYYD__03-25-2021--06_50_22.json
+    # Way 1 : 
+    #ftime=string_lib.get_mid_string_in_between(fname, "__",".json")
+    #asin=fname.split("\\")[-1].split("__")[0]
+    # Way 2 : regex  
+    p=".*\\\\(.*)__(.*--.*).json"
+    #only have one match 
+    (asin,download_time,)=re.findall(p,fname)[0]
+
+    with open(fname) as f:
+      dict = json.load(f)
+    s[asin][download_time]= dict  
+
+  # time is time series : e.g date_1  : last asin
+  x_axis=[time for time in s[asin]]
+  context['x_axis'] =",".join(x_axis)
+
+  # Rearrange and compression 
+  # Seperate into invariant one : feature_list etc and variant ones ,  
+  invariant_list=['ASIN','title','feature_list','producer','brand','date_first_available']
+  
+  for asin in s.keys():
+      first_time=list(s[asin].keys())[0]
+      s[asin]['_invarant']= collections_lib.create_dict()
+      for v in invariant_list :
+        s[asin]['_invarant'][v] = s[asin][first_time][v]    
+      for t in s[asin].keys():
+        if '--' in t : 
+        #is a time tag, pop out 
+          # delete invariant_list 
+          for v in invariant_list :
+            s[asin][t].pop(v,None) 
+          #  process price, bsr,no_comment  in the variant_list
+          s[asin][t]['price']=process_price(s[asin][t]['price'])         
+          s[asin][t]['best_seller_rank']=process_bsr(s[asin][t]['best_seller_rank'])          
+          s[asin][t]['no_of_comments']=process_comment(s[asin][t]['no_of_comments']) 
+          s[asin][t]['rating']=process_rating(s[asin][t]['rating']) 
+
+      #price=[s[t]["price"] for t in s[asin].keys() if '--' in t]
+     
+      #s['price_first_number']= price[0]
+      #s['price_list']= ",".join(price)
+
+  variant_list=['price','no_of_comments','rating']
+  # mark TODO :'best_seller_rank'] hwo to process 
+  asin_dict_list=dict_lib.create_dict()
+
+  for asin in s.keys():     
+    asin_dict=dict_lib.create_dict()
+    for v in variant_list:
+      # price 
+      _=[s[asin][t][v] for t in s[asin].keys() if '--' in t]      
+      asin_dict[v+'_first_number']= _[0]
+      asin_dict[v]= ",".join(_)
+    # best_seller_rank
+    asin_dict_list[asin]= asin_dict
+
+  context['asin_dict_list']=asin_dict_list
+  print("Line No,:",log_lib.get_line_number(),context['asin_dict_list'])
+
+  write_json(s,target_file_name)
+  return(context)
+
+
+""" // MARK : SECTION 3 : Load the processed asin file into dict and visualize (Old version )
+
+
 Function :  
   
 Parameters :
@@ -20,42 +214,20 @@ Parameters :
  "no_of_comments": "406 ratings",
 
 """
-from json import dumps
 
-from log_lib import Logger
-logger = Logger()
+def load_asin_master (context,master_file):
+  pass
 
-""" // MARK : create_result_json """
-# See Package N : Task Result file design 
-import json
-def create_task_result_json(scrapy_data): 
-  """
-  scrapy_data['result_dict']={
-    # 1. Meta data : Same as task model data
-    
-    "Meta_data":{
-      "task_id":scrapy_data["task_id"],
-      "start_time":scrapy_data["start_time"],
-      "end_time":scrapy_data["end_time"],
-      "asin_list":scrapy_data["asin_list"]
-      },
-    # 2. Invariant part of listing : 
-      "Invariant_data":{},
-      "Variant_data":{},
-      }
-  """
-  scrapy_data['result_dict']={"a":1}
-  #print(type(scrapy_data['result_dict']))
-  
-  #print(scrapy_data)
-  #logger.worker.warning(json.dumps(scrapy_data))
-  logger.worker.warning(scrapy_data)
-
-  return(scrapy_data)
-
-""" // MARK : load_asin_json """
 def load_asin_json(asin_list,context):
-  
+  """ <
+
+    Args:
+        <>:
+        <>:
+
+    Returns:
+      list: a list of strings representing the header columns
+  """   
   """
   Function :  
       1. read asin_list in the string 
@@ -79,9 +251,7 @@ def load_asin_json(asin_list,context):
       C:\Local\Work\Web\web\amazon\download\json_result\B07QDPRYYD.json
     
   """
-  
-  # logger.warning('asin_list')
-  # logger.warning(asin_list)
+
   # get the asin list  : eg. BSDNCD;BSSSN
   asin_list=asin_list.replace(' ', '').split(";")
   context['asin_list']=asin_list
@@ -155,72 +325,35 @@ def load_asin_json(asin_list,context):
   context['asin_dict_list']=asin_dict_list
   return(context)
 
-def read_asin_json(asin_list,context):
+
+# See Package N : Task Result file design 
+def create_task_result_json(scrapy_data): 
 
   """
-  NOTE : **deprecated**
-  Directly use load_asin_json 
-  Function :  
-    Read from asin_list from html form and put it and price data into context 
-  Parameters :
-    asin_list : string of ASIN Separated by "," 
-    context   : 
+  scrapy_data['result_dict']={
+    # 1. Meta data : Same as task model data
+    
+    "Meta_data":{
+      "task_id":scrapy_data["task_id"],
+      "start_time":scrapy_data["start_time"],
+      "end_time":scrapy_data["end_time"],
+      "asin_list":scrapy_data["asin_list"]
+      },
+    # 2. Invariant part of listing : 
+      "Invariant_data":{},
+      "Variant_data":{},
+      }
   """
+  scrapy_data['result_dict']={"a":1}
+ 
+  logger.worker.warning(scrapy_data)
 
-  context=load_asin_json(asin_list,context)
-  """
-  data_list=['123,50.3,49,48,52,51,47','35,59,30,81,46,55,30','45,59,0,81,46,55,30']
-  i=0
-  
-  #for i,asin in enumerate(asin_list) : 
-    #context['asin_string'][i]=asin
-   # dict[asin]['price_first']= context['price'][asin].split(",")[0]
-   # dict[asin]["no_of_comments_first"]= context['no_of_comments'].split(",")[0]
-  
-  #context['price_string_1']= data_list[0]
-  #context['price_string_2']= data_list[1]
-  
-  # price accords time seperated by , : "23,24,21"
-  #context['price_string_1']= context['asin_dict_list'][0]['price']
-  #context['price_string_2']= context['asin_dict_list'][1]['price']
-
-  # first date price 
-  #context['price_1']=  context['price_string_1'].split(",")[0]
-  
-  #context['price_2']=  context['price_string_2'].split(",")[0]
-  
-  #logger.warning('price_1')
-
-  #logger.warning(context['price_1'])
-  #logger.warning(context['price_2'])
-
-  ## number of comment accords time seperated by , : "23,24,21"  
-  #context['no_of_comments_string_1']= context['asin_dict_list'][0]['no_of_comments'] 
-  #context['no_of_comments_string_2']= context['asin_dict_list'][1]['no_of_comments'] 
-
-  # first date number of comment
-  #context['no_of_comments_first_1']= context['no_of_comments_string_1'].split(",")[0]
-  #context['no_of_comments_first_2']= context['no_of_comments_string_2'].split(",")[0]
-
-
-  #logger.warning('no_of_comments_first_1')
-
-  #logger.warning(context['no_of_comments_first_1'])
-  #logger.warning(context['no_of_comments_first_2'])
-
-  #logger.warning('price_string_1')
-  
-  #logger.warning(context['price_string_1'])
-  #logger.warning(context['price_string_2'])
-  for a in asin_list: 
-    context[a]= data_list[i]
-    i=i+1
-  return(context)
-
-  """
-
-
-
+  return(scrapy_data)
 if __name__ == '__main__':
-  create_task_result_json("B1")
+  task_id =""
+  context=dict_lib.create_dict()
+  process_asin_json_files(task_id,context)
+  #process_asin_json_files(original_file_name,target_file_name)    
+  #create_task_result_json("B1")
+
     
