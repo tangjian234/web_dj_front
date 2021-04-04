@@ -126,6 +126,7 @@ class scrapy_scheduler:
     """
     try : 
       """ Set start and end time  """  
+      
       """ //TODO  : replace with actual input from create form   """  
 
       local_start= datetime.now()
@@ -162,6 +163,12 @@ class scrapy_scheduler:
       file_lib.clear_file(download_output_list)
       
       #  : amazon_download :  run once now       
+      # Conversion : if start time == end time : meaning one time download 
+      # otherwise : perodic download 
+      
+      """ //TODO : implement conversion """
+
+          
       self.scheduler.add_job(self.process.crawl, args=[Download_Test,scrapy_data,OUTPUT_DIR])            
       
       ## amazon_download : run periodicity 

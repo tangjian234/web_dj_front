@@ -124,10 +124,17 @@ def process_asin_json_files(task_id,context):
   '''
   {Process downloaded asin_file by asin download spider. Save into a master file}
   Args    :
-    1. download_output_list:   
-    2. target_file_name :
+    1. task_id
+    2. context 
+
+
   Return  : context : full downloaded information 
   Example : 
+  
+  Note: 
+    - download_output_list created by scrapy quote_spider . save the downloaded asin file list into this file : 
+  
+    - Used here to process and summarize into a master file 
   '''
   # Create the file : 
   #download_output_list = "download_output_list_"+task_id+".txt"

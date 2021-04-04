@@ -32,6 +32,7 @@ visualization of download result in chart
 #------------------------------------------------------------------------>
 
 
+
 import datetime
 from django.dispatch import receiver, Signal
 from django.core.signals import request_finished
@@ -130,6 +131,7 @@ class ASIN_task_form(forms.ModelForm):
     class Meta:
         model = ASIN_task
         fields = "__all__"
+        # define the UI wigets for each fields 
         widgets = { 
           'ASIN_Name_List': forms.TextInput(attrs={'placeholder':'ASINAS'}),
           'Request_Status': forms.Select(choices=STATUS_CHOICES),
@@ -191,8 +193,12 @@ def create_asin_task(request):
               messages.success(request, 'Your task was updated successfully!')
               # save the form data to model
               form.save()
+
+              # check form content :
+
           else:    
               print("not valide")
+        
         if 'search-form' in request.POST:
            print('searched')
            form = ASIN_Search_task_form(request.POST, request.FILES)
