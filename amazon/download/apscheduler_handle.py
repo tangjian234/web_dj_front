@@ -4,16 +4,16 @@
 """
 {Description}
 
-This module 
+This module run scrapy crawl work in a python TwistedScheduler apscheduler
 
-{Classes} : 
+{Classes} : scrapy_scheduler : run crawl work in a python apscheduler, run once or periodicity 
 
 
 {Methods} :  
 
-  1.  
+  1.  __init__() : Initialize scheduler,  kick start crawl process ,
   
-  2.  
+  2.  handle_scrapy_start() : add crawl job to scheduler. add listener to get call back function, when task is done
 
   __author__ : Jian tang 
 """

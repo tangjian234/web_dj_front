@@ -14,7 +14,7 @@ This module process asin download json file from scrappy asin downloader : quote
   1. process_asin_json_files() :
       Process downloaded asin_file by asin download spider, save into a master file  
   
-  2. load_asin_json() : 
+  2. load_asin_json() : Old Deprecated
       load the master file to visualize
 
   __author__ : Jian tang 
