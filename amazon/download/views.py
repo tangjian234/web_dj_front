@@ -4,17 +4,27 @@
 """
 {Description}
 
-This module : view of django framework : display data
+This module define the view of django framework : display data inform and 
+visualization of download result in chart 
 
 {Classes} : 
 
 
 {Methods} :  
 
-  1. ASIN_Search_task_form()
-  2. ASIN_task_form()
-  3. create_asin_task() 
-  4. show_asin_task()
+  1. ASIN_Search_task_form() : 
+    define ASIN_Search_task_form content
+  
+  2. ASIN_task_form() : 
+    define ASIN_task_form content
+  
+  3. create_asin_task() : 
+    prepare forms to input asin_download_task information 
+  
+  4. show_asin_task() : 
+      1. Show the created asin download tasks (status); 
+      2. Show the product 1 vs 1 key parameter comparision table 
+      3. Plot different charts : line, radar
    
   __author__ : Jian tang 
 
@@ -66,7 +76,7 @@ import datetime
 """ // MARK :  ASIN_Search_task_form """
 class ASIN_Search_task_form(forms.ModelForm):
     '''
-    <A class used to 
+    <A class used to define ASIN_Search_task_form content
 
     <Attributes> 
     ----------
@@ -112,12 +122,8 @@ class ASIN_task_form(forms.ModelForm):
     
     def __init__(self, *args, **kwargs): 
       super(ASIN_task_form, self).__init__(*args, **kwargs)
-      #start= datetime.date.today()
-      #end = start + datetime.timedelta(days = 1)
       self.fields['ASIN_Name_List'].initial  = 'B08DDZZRJF'
       self.fields['Request_Description'].initial  = 'Download list of ASIN Periodicly, ASIN serperated by ;  '
-      #self.fields['Start_Time'].initial  = start
-      #self.fields['End_Time'].initial  = end
       self.fields['Request_Status'].initial  = 'Ready'
     
     # specify the name of model to use
@@ -139,16 +145,14 @@ show_asin_task
 
 """// MARK : Create_asin_task """
 def create_asin_task(request):
-    """
-    Function :  
-      1. 
-      2. 
 
-    Parameters :
-      : request: Standard request, 
-      : 
-    """
-
+    '''
+    Create_asin_task : prepare forms to input asin_download_task information 
+    Args    : 
+      request : standard django input 
+    Return  : None
+    Example : 
+    '''
     context = {}
     head_title = 'Create ASIN Task'
     # Create the  init value form according
@@ -213,13 +217,16 @@ import string_lib
 """// MARK : Show_asin_task """ 
 def show_asin_task(request):      
     """
+      Visualization of download result 
+
       1. Show the created asin download tasks (status); 
       2. Show the product 1 vs 1 key parameter comparision table 
       3. Plot different charts : line, radar
 
-    Parameters :
+    Args:
       : request: Standard request, 
       : 
+    Return:   
     """
     #  Get entries from ASIN_task database 
     all_objects = ASIN_task.objects.all()

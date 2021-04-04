@@ -25,16 +25,22 @@ from datetime import timedelta
 
 
 """ // MARK :  SECTION 1 :  Define asin download task   """
-# The first element in each tuple is the actual value to be set on the model, and the second element is the human-readable name.
-# Status of a ASIN_TASK; it is a string 
+
+""" STATUS_CHOICES :
+    1. Status of a ASIN_TASK; it is a string : for ASIN_task_form
+    2. the first element in each tuple is the actual value to be set on the model, and the second element is the human-readable name.
+"""
 STATUS_CHOICES = [ 
-    ("Ready", "Ready"), 
-    ("Ongoing", "Ongoing"), 
-    ("Complete", "Complete"), 
-    ("Error", "Error"), 
+  ("Ready", "Ready"), 
+  ("Ongoing", "Ongoing"), 
+  ("Complete", "Complete"), 
+  ("Error", "Error"), 
  ]
 
-# top No of search result :  e.g top 4 of the bluetooth headset search 
+""" NUMBER_CHOICES :
+    1. top No of search result :  e.g top 4 of the bluetooth headset search 
+    2. for ASIN_task_search_form
+"""
 NUMBER_CHOICES = [ 
     (1, 1), 
     (2, 2), 
@@ -65,22 +71,22 @@ class ASIN_task(models.Model):
     -------
  
   """
-
-  #  ASIN : request
-  #asin_name = models.ForeignKey('ASIN', on_delete=models.SET_NULL, null=True) #
-  # Task_ID= get_random_string(8)
-  #ASIN_Request_ID =  models.TextField(default="")
-  # ASIN_Request_ID =  models.TextField(Task_ID)
-  #ASIN_task_id= get_random_string(3)
+  # ID:  unique task ID 
   ASIN_task_uuid = models.UUIDField(
       primary_key=True, default=uuid.uuid4, editable=False)
-
+  
+  # task name and description 
   ASIN_Name_List = models.CharField(max_length=63, default="a1-")
+  
   Request_Description = models.CharField(max_length=63, default="b1-")
+  
+  # Time : also set default 
   Start_Time = models.DateTimeField(default=datetime.now)  # starting date: default today.
   # end data : default date : default 3
   Interval=models.DurationField(default=timedelta(seconds=5))
   End_Time = models.DateTimeField(default=datetime.now)
+  
+  # Task Status:  Use choice to 
   Request_Status = models.CharField(max_length=63,choices=STATUS_CHOICES)
  
 class ASIN_Search_task(models.Model):
@@ -104,9 +110,11 @@ class ASIN_Search_task(models.Model):
 
   ASIN_Search_List = models.CharField(max_length=63, default="a1-")
   Number_Of_Result = models.IntegerField(default=10,choices=NUMBER_CHOICES)
+  
   Start_Time = models.DateTimeField(default=datetime.now)  # starting date: default today.
   # end data : default date : default 3
   End_Time = models.DateTimeField(default=datetime.now)
+  
   Request_Status = models.CharField(max_length=63,choices=STATUS_CHOICES) 
  
 """ // MARK :  SECTION 2 :  Other models  """

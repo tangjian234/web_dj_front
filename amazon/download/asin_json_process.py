@@ -4,10 +4,14 @@
 """
 {Description}
 
-This module process asin download json file from scrappy asin downloader : quotes_spider
+This module process asin download json file from scrappy asin downloader : quotes_spider and save result in a master file.
+
+{Note:} 
+  
+  1. asin_download  task indexed by task_id. 
+  2. 
 
 {Classes} : 
-
 
 {Methods} :  
 
@@ -18,6 +22,7 @@ This module process asin download json file from scrappy asin downloader : quote
       load the master file to visualize
 
   __author__ : Jian tang 
+
 """
 #------------------------------------------------------------------------>
 
@@ -131,7 +136,7 @@ def process_asin_json_files(task_id,context):
   download_output_list = Path(r'C:\Local\Work\Python\PyLib\scrapy\download\result\download_output_list-'+task_id+'.txt')
   print("Line No,:",log_lib.get_line_number(),download_output_list )
   target_file_name = Path(r"C:\Local\Work\Python\PyLib\scrapy\download\result\master_" + task_id+".json")
-  print("Line No,:",log_lib.get_line_number(),target_file_name )
+  
 
   
   file_list=load_lines(download_output_list)
