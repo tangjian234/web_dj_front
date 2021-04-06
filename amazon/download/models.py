@@ -37,6 +37,13 @@ STATUS_CHOICES = [
   ("Error", "Error"), 
  ]
 
+
+# Periodicity
+PERIODICITY_CHOICES = [ 
+  ("Once", "Once"), 
+  ("Periodic:Start Now", "Periodic:Start Now"), 
+  ("Periodic:Start Later", "Periodic:Start Later"), 
+ ]
 """ NUMBER_CHOICES :
     1. top No of search result :  e.g top 4 of the bluetooth headset search 
     2. for ASIN_task_search_form
@@ -79,10 +86,12 @@ class ASIN_task(models.Model):
   ASIN_Name_List = models.CharField(max_length=63, default="a1-")
   
   Request_Description = models.CharField(max_length=63, default="b1-")
+
+  Periodicity = models.CharField(max_length=63,choices=PERIODICITY_CHOICES)
   
   # Time : also set default 
   Start_Time = models.DateTimeField(default=datetime.now)  # starting date: default today.
-  # end data : default date : default 3
+  # end data : default date : default 0
   Interval=models.DurationField(default=timedelta(seconds=5))
   End_Time = models.DateTimeField(default=datetime.now)
   

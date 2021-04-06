@@ -31,7 +31,8 @@ visualization of download result in chart
 """
 #------------------------------------------------------------------------>
 
-
+import sys
+sys.path.append(".")
 
 import datetime
 from django.dispatch import receiver, Signal
@@ -46,7 +47,7 @@ import sys
 import os
 
 from .models import Lead
-from .models import ASIN, ASIN_Instance, ASIN_task, Task_Status,ASIN_Search_task,STATUS_CHOICES,NUMBER_CHOICES
+from .models import ASIN, ASIN_Instance, ASIN_task, Task_Status,ASIN_Search_task,STATUS_CHOICES,NUMBER_CHOICES,PERIODICITY_CHOICES
 from background_task import background
 #from .tasks import person_view
 from .models import Person
@@ -54,6 +55,7 @@ from .models import Person
 import django.dispatch
 from bootstrap_datepicker_plus import DatePickerInput,DateTimePickerInput
 from durationwidget.widgets import TimeDurationWidget
+import log_lib    
 
 
 from .asin_json_process import load_asin_json,create_task_result_json,process_asin_json_files
@@ -126,6 +128,8 @@ class ASIN_task_form(forms.ModelForm):
       self.fields['ASIN_Name_List'].initial  = 'B08DDZZRJF'
       self.fields['Request_Description'].initial  = 'Download list of ASIN Periodicly, ASIN serperated by ;  '
       self.fields['Request_Status'].initial  = 'Ready'
+      self.fields['Periodicity'].initial  = 'Once'
+
     
     # specify the name of model to use
     class Meta:
@@ -135,6 +139,7 @@ class ASIN_task_form(forms.ModelForm):
         widgets = { 
           'ASIN_Name_List': forms.TextInput(attrs={'placeholder':'ASINAS'}),
           'Request_Status': forms.Select(choices=STATUS_CHOICES),
+          'Periodicity': forms.Select(choices=PERIODICITY_CHOICES),
           'Start_Time': DateTimePickerInput(),
           'Interval':TimeDurationWidget(),
           'End_Time': DateTimePickerInput(),
@@ -144,6 +149,16 @@ class ASIN_task_form(forms.ModelForm):
 create_asin_task
 show_asin_task
 """
+
+import dict_lib
+def display_form_content(form):
+  for k in form.cleaned_data.keys():
+    print(k,form.cleaned_data[k],type(form.cleaned_data[k]))
+  Interval=form.cleaned_data['Interval'].seconds
+  if (0 == Interval):
+    print("Line No,:",log_lib.get_line_number(),i) 
+  #r=form.cleaned_data['Start_Time']
+  # print("Line No,:",log_lib.get_line_number(),r)
 
 """// MARK : Create_asin_task """
 def create_asin_task(request):
@@ -179,7 +194,6 @@ def create_asin_task(request):
     """
     
     
-    
     form = ASIN_task_form()
     search_form = ASIN_Search_task_form()
     if request.POST: 
@@ -195,6 +209,7 @@ def create_asin_task(request):
               form.save()
 
               # check form content :
+              display_form_content(form)
 
           else:    
               print("not valide")
@@ -284,11 +299,14 @@ def show_asin_task(request):
 
             scrapy_data['asin_list'] =asin_list
             scrapy_data['task_id'] =run_pk
+            scrapy_data['Periodicity'] =entry.Periodicity
             
             
-            # scrapy_data['start_time']=entry.Start_Time
-            # scrapy_data['start_time']=entry.Start_Time
-            # scrapy_data['end_time']=entry.End_Time
+            
+            scrapy_data['start_time']=entry.Start_Time
+            scrapy_data['interval']=entry.Interval
+            scrapy_data['end_time']=entry.End_Time
+            
             
             #scrapy_data=create_task_result_json(scrapy_data)
 
@@ -301,6 +319,8 @@ def show_asin_task(request):
           plot_pk = request.POST.get("plot-id")
           entry=all_objects.get(pk=plot_pk)
           asin_list=entry.ASIN_Name_List
+
+          
           
           # Get asin_list and price data 
           #context=load_asin_json(asin_list,context)

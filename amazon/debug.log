@@ -659,3 +659,433 @@ TypeError: sequence item 0: expected str instance, list found
 2021-04-03 06:52:34,559 django.server ERROR    "POST /download/show_asin_task HTTP/1.1" 500 86575
 2021-04-03 06:55:03,641 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
 2021-04-03 06:57:58,804 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-04 19:49:12,744 django.request ERROR    Internal Server Error: /download/create_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 198, in create_asin_task
+    n=form.fields['ASIN_Name_List'].values()
+AttributeError: 'CharField' object has no attribute 'values'
+2021-04-04 19:49:12,748 django.server ERROR    "POST /download/create_asin_task HTTP/1.1" 500 71832
+2021-04-04 19:57:22,318 django.request ERROR    Internal Server Error: /download/create_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 198, in create_asin_task
+    n=form.cleaned_data['ASIN_Name_List']
+AttributeError: 'ASIN_task_form' object has no attribute 'cleaned'
+2021-04-04 19:57:22,321 django.server ERROR    "POST /download/create_asin_task HTTP/1.1" 500 72335
+2021-04-04 20:05:17,324 django.request ERROR    Internal Server Error: /download/create_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 202, in create_asin_task
+    display_form_content(form)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 151, in display_form_content
+    dict_lib.disp_dict(form.cleaned_data)
+  File "C:\Local\Work\Python\PyLib\dict_lib.py", line 74, in disp_dict
+    print(json.dumps(dict,indent=4))
+  File "C:\Python38\lib\json\__init__.py", line 234, in dumps
+    return cls(
+  File "C:\Python38\lib\json\encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "C:\Python38\lib\json\encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Python38\lib\json\encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "C:\Python38\lib\json\encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "C:\Python38\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable
+2021-04-04 20:05:17,331 django.server ERROR    "POST /download/create_asin_task HTTP/1.1" 500 120558
+2021-04-05 01:08:57,826 django.request ERROR    Internal Server Error: /download/create_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 206, in create_asin_task
+    display_form_content(form)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 152, in display_form_content
+    print(k,form.cleaned_data[k],type(cleaned_data[k]))
+NameError: name 'cleaned_data' is not defined
+2021-04-05 01:08:57,830 django.server ERROR    "POST /download/create_asin_task HTTP/1.1" 500 77497
+2021-04-05 01:37:49,032 django.request ERROR    Internal Server Error: /download/create_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 208, in create_asin_task
+    display_form_content(form)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 154, in display_form_content
+    form.cleaned_data[k].Interval.seconds
+AttributeError: 'str' object has no attribute 'Interval'
+2021-04-05 01:37:49,035 django.server ERROR    "POST /download/create_asin_task HTTP/1.1" 500 78173
+2021-04-05 01:38:54,147 django.request ERROR    Internal Server Error: /download/create_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 209, in create_asin_task
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 156, in display_form_content
+    #r=form.cleaned_data['Start_Time']
+AttributeError: 'str' object has no attribute 'Interval'
+2021-04-05 01:38:54,150 django.server ERROR    "POST /download/create_asin_task HTTP/1.1" 500 75861
+2021-04-05 01:55:46,508 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such column: download_asin_task.Periodicity
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 322, in show_asin_task
+    return render(request, 'show_asin_task.html', context)
+  File "c:\python38\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "c:\python38\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "c:\python38\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "c:\python38\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "c:\python38\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "c:\python38\lib\site-packages\django\template\defaulttags.py", line 168, in render
+    len_values = len(values)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 269, in __len__
+    self._fetch_all()
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 1303, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 53, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "c:\python38\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such column: download_asin_task.Periodicity
+2021-04-05 01:55:46,521 django.server ERROR    "GET /download/show_asin_task HTTP/1.1" 500 217919
+2021-04-05 02:00:46,103 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such column: download_asin_task.Periodicity
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 322, in show_asin_task
+    return render(request, 'show_asin_task.html', context)
+  File "c:\python38\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "c:\python38\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "c:\python38\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "c:\python38\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "c:\python38\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "c:\python38\lib\site-packages\django\template\defaulttags.py", line 168, in render
+    len_values = len(values)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 269, in __len__
+    self._fetch_all()
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 1303, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 53, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "c:\python38\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such column: download_asin_task.Periodicity
+2021-04-05 02:00:46,116 django.server ERROR    "GET /download/show_asin_task HTTP/1.1" 500 217782
+2021-04-05 02:01:10,808 django.request ERROR    Internal Server Error: /download/create_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: table download_asin_task has no column named Periodicity
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 207, in create_asin_task
+    form.save()
+  File "c:\python38\lib\site-packages\django\forms\models.py", line 460, in save
+    self.instance.save()
+  File "c:\python38\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "c:\python38\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "c:\python38\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "c:\python38\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "c:\python38\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 1249, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "c:\python38\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: table download_asin_task has no column named Periodicity
+2021-04-05 02:01:10,822 django.server ERROR    "POST /download/create_asin_task HTTP/1.1" 500 161980
+2021-04-05 02:03:21,883 django.request ERROR    Internal Server Error: /download/create_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: download_asin_task
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 207, in create_asin_task
+    form.save()
+  File "c:\python38\lib\site-packages\django\forms\models.py", line 460, in save
+    self.instance.save()
+  File "c:\python38\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "c:\python38\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "c:\python38\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "c:\python38\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "c:\python38\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 1249, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "c:\python38\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: download_asin_task
+2021-04-05 02:03:21,897 django.server ERROR    "POST /download/create_asin_task HTTP/1.1" 500 162013
+2021-04-05 02:04:24,344 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: download_asin_task
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 322, in show_asin_task
+    return render(request, 'show_asin_task.html', context)
+  File "c:\python38\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "c:\python38\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "c:\python38\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "c:\python38\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "c:\python38\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "c:\python38\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "c:\python38\lib\site-packages\django\template\defaulttags.py", line 168, in render
+    len_values = len(values)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 269, in __len__
+    self._fetch_all()
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 1303, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 53, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "c:\python38\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "c:\python38\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "c:\python38\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: download_asin_task
+2021-04-05 02:04:24,362 django.server ERROR    "GET /download/show_asin_task HTTP/1.1" 500 217976
+2021-04-05 02:06:33,838 django.request ERROR    Internal Server Error: /download/create_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 197, in create_asin_task
+    search_form = ASIN_Search_task_form()
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 108, in __init__
+    self.fields['Periodicity'].initial  = 'Ready'
+KeyError: 'Periodicity'
+2021-04-05 02:06:33,842 django.server ERROR    "GET /download/create_asin_task HTTP/1.1" 500 77444
+2021-04-05 02:06:56,621 django.request ERROR    Internal Server Error: /download/create_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 197, in create_asin_task
+    search_form = ASIN_Search_task_form()
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 109, in __init__
+    self.fields['Periodicity'].initial  = 'Once'
+KeyError: 'Periodicity'
+2021-04-05 02:06:56,626 django.server ERROR    "GET /download/create_asin_task HTTP/1.1" 500 77374
+2021-04-05 02:06:58,720 django.request ERROR    Internal Server Error: /download/create_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 197, in create_asin_task
+    search_form = ASIN_Search_task_form()
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 109, in __init__
+    self.fields['Periodicity'].initial  = 'Once'
+KeyError: 'Periodicity'
+2021-04-05 02:06:58,723 django.server ERROR    "GET /download/create_asin_task HTTP/1.1" 500 77374
+2021-04-05 12:58:14,170 django.request WARNING  Not Found: /favicon.ico
+2021-04-05 12:58:14,171 django.server WARNING  "GET /favicon.ico HTTP/1.1" 404 2081

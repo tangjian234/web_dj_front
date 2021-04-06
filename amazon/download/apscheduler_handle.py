@@ -129,9 +129,7 @@ class scrapy_scheduler:
       
       """ //TODO  : replace with actual input from create form   """  
 
-      local_start= datetime.now()
-      local_end=local_start+ timedelta(seconds=60)
-      local_interval = 8  # in seconds
+
 
       #end=start+ timedelta(hours=10)
       logger.worker.warning(scrapy_data)
@@ -168,14 +166,28 @@ class scrapy_scheduler:
       
       """ //TODO : implement conversion """
 
-          
-      self.scheduler.add_job(self.process.crawl, args=[Download_Test,scrapy_data,OUTPUT_DIR])            
+      if ('Once' in scrapy_data['Periodicity'] ) :        
+        print('run once')  
+        self.scheduler.add_job(self.process.crawl, args=[Download_Test,scrapy_data,OUTPUT_DIR])            
       
       ## amazon_download : run periodicity 
-      """
-      self.scheduler.add_job(self.process.crawl, 'interval', args=[Download_Test,scrapy_data,OUTPUT_DIR], seconds=local_interval,
+      if ('Start Now' in scrapy_data['Periodicity'] ) :     
+        local_start=  scrapy_data['start_time']
+        local_interval = 8  # in seconds   
+        local_end= local_start+ timedelta(seconds=16)
+
+        self.scheduler.add_job(self.process.crawl, 'interval', args=[Download_Test,scrapy_data,OUTPUT_DIR], seconds=local_interval,
       next_run_time=datetime.now(),start_date = local_start,end_date=local_end )
-      """
+
+      if ('Start Later' in scrapy_data['Periodicity'] ) :     
+        local_start=  scrapy_data['start_time']
+        local_interval = 8  # in seconds   
+        local_end= local_start+ timedelta(seconds=16)
+
+        #scrapy_data['start_time']=entry.Start_Time
+        #scrapy_data['interval']=entry.Interval
+        #scrapy_data['end_time']=entry.End_Time
+
       """ Kick start the craw process    """  
       
       self.process.start(False) 

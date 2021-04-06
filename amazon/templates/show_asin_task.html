@@ -15,7 +15,7 @@
      <p>{{ asin_list  | json_script:"asin_list"}}</p>
      <p>{{ asin_dict_list  | json_script:"asin_dict_list"}}</p>
      <p>{{ data  | json_script:"data"}}</p>
-     
+
      <!-- Row : 1  :  Task Table   -->
      <div class="row d-flex align-items-md-stretch">
        <!-- Table  -->
@@ -34,15 +34,19 @@
                      <!-- <th>ASIN_task_id</th>  -->
                      <th>ASIN_Name_List</th>
                      <th>Status</th>
+                     <th>Periodicity</th>
                      <th>ASIN_Start_Time</th>
+                     <th>ASIN_Interval</th>
                      <th>ASIN_End_time</th>
+
+
                      <th>Action</th>
                      <th>
-                     <!-- Must have form to post and send data to views.py -->
-                     <form method="POST">
-                     {% csrf_token %}
-                     <button class="btn btn-primary" type="Submit" name="shutdown-id">Shutdown</button>
-                     </form>
+                       <!-- Must have form to post and send data to views.py -->
+                       <form method="POST">
+                         {% csrf_token %}
+                         <button class="btn btn-primary" type="Submit" name="shutdown-id">Shutdown</button>
+                       </form>
                      </th>
                    </tr>
                  </thead>
@@ -67,16 +71,30 @@
                        <button class="btn btn-dark" type="button">Ready</button>
                        {% endif %}
                      </td>
+                     <td>{{item.Periodicity}}</td>
+
                      <!-- asin task Start end time   -->
-                     <td>{{item.Start_Time}}</td>
-                     <td>{{item.End_Time}}</td>
+                     {% if "Once" == item.Periodicity  %}
+                      <td> - </td>
+                      <td> - </td>
+                      <td> - </td>                     
+
+                     {% else %}
+                     {% if "Periodic:Start Now" == item.Periodicity  %}
+                      <td> Now </td>                     
+                     {% else %}
+                      <td>{{item.Start_Time}}</td>
+                     {% endif %}
+                      <td>{{item.Interval}}</td>
+                      <td>{{item.End_Time}}</td>
+                     {% endif %}
 
                      <td>
 
                        <!-- submit the form inform : run, delete, modify, plot 
                        data transfer : x[name(run_id)] = value(item.pk) 
                         run_pk = request.POST.get("run-id")
-                       --> 
+                       -->
                        <form method="POST">
                          {% csrf_token %}
                          <button class="btn btn-primary" type="Submit" name="run-id" value="{{item.pk}}">Run</button>
@@ -159,8 +177,8 @@
        <!-- Line Chart : 2 product comparision : price    -->
 
        <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
-        <!-- Json_script : package list into json format :  -->
-        <!-- Corresponding : var d = (data_from_django[asin_list[0]]["price"]); -->
+         <!-- Json_script : package list into json format :  -->
+         <!-- Corresponding : var d = (data_from_django[asin_list[0]]["price"]); -->
 
          <div class="card sales-report">
            <h2 class="display h4">Sales report</h2>
@@ -173,7 +191,7 @@
 
        <!-- Line Chart : 2 product number of comment comparsion  -->
        <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
-          <div class="card sales-report">
+         <div class="card sales-report">
            <h2 class="display h4">Sales report</h2>
            <p> Comment Comparision of 2 ASIN product-1 </p>
            <div class="line-chart">
