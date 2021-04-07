@@ -53,8 +53,18 @@ logger = Logger()
 #  process price
 
 """ // MARK :  SECTION 1 : Processing and variant such as price and format them  """
- 
+import re
+def process_title(title):
+  # first 6 words is highligheted 
+  x=string_lib.get_regex_string(title,r'^(\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+)',0)
+  modified_title_head=x
+  modified_title_rest=title.replace(x,"")
+  return(modified_title_head,modified_title_rest)
+
+
 def process_price(price_download):
+
+
   '''
   {Format price}
   Return : first of list of price with dollar sign in it. USD only. 
@@ -62,7 +72,7 @@ def process_price(price_download):
 
   if type(price_download) is list:
      price = list(filter(lambda var : '$' in var, price_download))[-1]
-     price=price.replace("$","")
+     price=string_lib.get_regex_string(price,r'\$(\d+\.\d+)',0)
   else: 
     # default value 
     price='0.0'   
@@ -112,7 +122,8 @@ def process_bsr(bsr_download):
   for i in range(len(bsr_download)):
       bsr[i]['category']=bsr_download[i][1]
       bsr[i]['rank']=bsr_download[i][0]  
-  return(bsr)
+  bsr_string=json.dumps(bsr,indent=5)
+  return(bsr_string)
 
 from pathlib import Path
 
@@ -172,14 +183,16 @@ def process_asin_json_files(task_id,context):
 
   # Rearrange and compression 
   # Seperate into invariant one : feature_list etc and variant ones ,  
-  invariant_list=['ASIN','title','feature_list','producer','brand','date_first_available']
+  invariant_list=['ASIN','title','feature_list','producer','brand']
   context['asin_list']= list(s.keys())
   
   for asin in s.keys():
       first_time=list(s[asin].keys())[0]
       s[asin]['_invarant']= collections_lib.create_dict()
+      
       for v in invariant_list :
-        s[asin]['_invarant'][v] = s[asin][first_time][v]    
+        s[asin]['_invarant'][v] = s[asin][first_time][v] 
+
       for t in s[asin].keys():
         if '--' in t : 
         #is a time tag, pop out 
@@ -188,7 +201,8 @@ def process_asin_json_files(task_id,context):
             s[asin][t].pop(v,None) 
           #  process price, bsr,no_comment  in the variant_list
           s[asin][t]['price']=process_price(s[asin][t]['price'])         
-          s[asin][t]['best_seller_rank']=process_bsr(s[asin][t]['best_seller_rank'])          
+          s[asin][t]['best_seller_rank']=process_bsr(s[asin][t]['best_seller_rank']) 
+
           s[asin][t]['no_of_comments']=process_comment(s[asin][t]['no_of_comments']) 
           s[asin][t]['rating']=process_rating(s[asin][t]['rating']) 
   print("Line No,:",log_lib.get_line_number(),s)
@@ -199,13 +213,19 @@ def process_asin_json_files(task_id,context):
       #s['price_first_number']= price[0]
       #s['price_list']= ",".join(price)
 
-  variant_list=['price','no_of_comments','rating']
-  # mark TODO :'best_seller_rank'] hwo to process 
+  variant_list=['price','no_of_comments','rating','best_seller_rank','date_first_available']
+  
   #asin_dict_list=dict_lib.create_dict()
+  
   asin_dict_list={}
   for asin in s.keys():     
     #asin_dict=dict_lib.create_dict()
     asin_dict={}
+    # title : hightlight first 6 word for display 
+    (asin_dict['title_head'],asin_dict['title_rest'])=process_title(s[asin]['_invarant']['title'])
+    # bsr : json dump indent 5
+    
+    
     for v in variant_list:
       # price 
       _=[s[asin][t][v] for t in s[asin].keys() if '--' in t]      

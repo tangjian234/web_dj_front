@@ -1089,3 +1089,89 @@ KeyError: 'Periodicity'
 2021-04-05 02:06:58,723 django.server ERROR    "GET /download/create_asin_task HTTP/1.1" 500 77374
 2021-04-05 12:58:14,170 django.request WARNING  Not Found: /favicon.ico
 2021-04-05 12:58:14,171 django.server WARNING  "GET /favicon.ico HTTP/1.1" 404 2081
+2021-04-05 20:57:58,480 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 266, in show_asin_task
+    task_entry = all_objects.get(pk=task_id)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+download.models.ASIN_task.DoesNotExist: ASIN_task matching query does not exist.
+2021-04-05 20:57:58,480 django.server ERROR    "GET /download/show_asin_task HTTP/1.1" 500 74619
+2021-04-05 20:58:23,444 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 266, in show_asin_task
+    task_entry = all_objects.get(pk=task_id)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+download.models.ASIN_task.DoesNotExist: ASIN_task matching query does not exist.
+2021-04-05 20:58:23,445 django.server ERROR    "GET /download/show_asin_task HTTP/1.1" 500 74619
+2021-04-05 20:58:28,733 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 266, in show_asin_task
+    task_entry = all_objects.get(pk=task_id)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+download.models.ASIN_task.DoesNotExist: ASIN_task matching query does not exist.
+2021-04-05 20:58:28,735 django.server ERROR    "GET /download/show_asin_task HTTP/1.1" 500 75077
+2021-04-05 20:59:29,586 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 266, in show_asin_task
+    task_entry = all_objects.get(pk=task_id)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+download.models.ASIN_task.DoesNotExist: ASIN_task matching query does not exist.
+2021-04-05 20:59:29,587 django.server ERROR    "GET /download/show_asin_task HTTP/1.1" 500 75077
+2021-04-05 21:00:33,059 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 266, in show_asin_task
+    task_entry = all_objects.get(pk=task_id)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+download.models.ASIN_task.DoesNotExist: ASIN_task matching query does not exist.
+2021-04-05 21:00:33,060 django.server ERROR    "GET /download/show_asin_task HTTP/1.1" 500 75077
+2021-04-05 21:09:27,409 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 327, in show_asin_task
+    context=process_asin_json_files(plot_pk,context)
+  File "C:\Local\Work\Web\web\amazon\download\asin_json_process.py", line 149, in process_asin_json_files
+    file_list=load_lines(download_output_list)
+  File "C:\Local\Work\Python\PyLib\file_lib.py", line 309, in load_lines
+    with open(Path(fname), 'r') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Local\\Work\\Python\\PyLib\\scrapy\\download\\result\\download_output_list-fc1ff531-10d1-40a2-baec-f70a24aa3c06.txt'
+2021-04-05 21:09:27,414 django.server ERROR    "POST /download/show_asin_task HTTP/1.1" 500 79922
+2021-04-05 22:23:26,439 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 327, in show_asin_task
+    context=process_asin_json_files(plot_pk,context)
+  File "C:\Local\Work\Web\web\amazon\download\asin_json_process.py", line 225, in process_asin_json_files
+    print("Line No,:",log_lib.get_line_number(),asin_dict['title'])
+KeyError: 'title'
+2021-04-05 22:23:26,443 django.server ERROR    "POST /download/show_asin_task HTTP/1.1" 500 84974
