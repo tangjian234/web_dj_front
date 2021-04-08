@@ -216,7 +216,6 @@ def process_asin_json_files(task_id,context):
   variant_list=['price','no_of_comments','rating','best_seller_rank','date_first_available']
   
   #asin_dict_list=dict_lib.create_dict()
-  
   asin_dict_list={}
   for asin in s.keys():     
     #asin_dict=dict_lib.create_dict()
@@ -232,6 +231,8 @@ def process_asin_json_files(task_id,context):
       asin_dict[v+'_first_number']= _[0]
       asin_dict[v]= ",".join(_)
     # best_seller_rank
+    
+    print("price Line No,:",log_lib.get_line_number(),asin_dict['price'])
     asin_dict_list[asin]= asin_dict
 
   context['asin_dict_list']=asin_dict_list

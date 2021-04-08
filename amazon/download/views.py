@@ -253,20 +253,25 @@ def show_asin_task(request):
     all_objects = ASIN_task.objects.all()
  
     context = {'all_objects': all_objects}
-    logger.worker.warning('log in show asin-0!')
-    print('log - in show asin-0!')
 
     # Will run GET if reload, Get means reload 
     if request.method == 'GET':      
       #logger.worker.warning(request.GET)
       #logger.worker.warning(request.META['QUERY_STRING'])
+
       for task_id in scheduler.job_complete_status.keys(): 
+        logger.worker.warning('log in- show asin-0!')
+
         if (scheduler.job_complete_status[task_id]):
           # check scheduler task complete status : 
+          print(scheduler.job_complete_status[task_id])
+          # make if more robust do nothing if can not get valid value . 
+          
           task_entry = all_objects.get(pk=task_id)
+            
           task_entry.Request_Status = "Complete"
           task_entry.save()
-          logger.worker.warning(task_id + ": "+ task_entry.ASIN_Name_List + "  Status changed")
+          #  logger.worker.warning(task_id + ": "+ task_entry.ASIN_Name_List + "  Status changed")
       
     # Will run POST if submite button is clicked inside form 
     if request.method == 'POST':

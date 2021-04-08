@@ -1175,3 +1175,51 @@ Traceback (most recent call last):
     print("Line No,:",log_lib.get_line_number(),asin_dict['title'])
 KeyError: 'title'
 2021-04-05 22:23:26,443 django.server ERROR    "POST /download/show_asin_task HTTP/1.1" 500 84974
+2021-04-07 16:59:37,426 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 266, in show_asin_task
+    task_entry = all_objects.get(pk=task_id)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+download.models.ASIN_task.DoesNotExist: ASIN_task matching query does not exist.
+2021-04-07 16:59:37,430 django.server ERROR    "GET /download/show_asin_task HTTP/1.1" 500 75077
+2021-04-07 16:59:48,435 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 266, in show_asin_task
+    task_entry = all_objects.get(pk=task_id)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+download.models.ASIN_task.DoesNotExist: ASIN_task matching query does not exist.
+2021-04-07 16:59:48,437 django.server ERROR    "GET /download/show_asin_task HTTP/1.1" 500 74901
+2021-04-07 16:59:59,712 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 266, in show_asin_task
+    task_entry = all_objects.get(pk=task_id)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+download.models.ASIN_task.DoesNotExist: ASIN_task matching query does not exist.
+2021-04-07 16:59:59,713 django.server ERROR    "GET /download/show_asin_task HTTP/1.1" 500 75077
+2021-04-07 17:00:06,817 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 266, in show_asin_task
+    task_entry = all_objects.get(pk=task_id)
+  File "c:\python38\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+download.models.ASIN_task.DoesNotExist: ASIN_task matching query does not exist.
+2021-04-07 17:00:06,818 django.server ERROR    "GET /download/show_asin_task HTTP/1.1" 500 75038

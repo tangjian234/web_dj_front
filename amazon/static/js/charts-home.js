@@ -133,7 +133,6 @@ $(document).ready(function() {
         }
     });
 
-
     var LINECHART_COMMENT = $('#2_Product_Comment_Comparision');
 
     var myLineChart = new Chart(LINECHART_COMMENT, {
@@ -307,7 +306,8 @@ $(document).ready(function() {
     });
 
     RADARCHARTEXMPLE = $('#radarChartExample');
-    var radarChartExample = new Chart(RADARCHARTEXMPLE, {
+
+    var radarChartExample = new Chart(RADARCHARTEXAMPLE, {
 
         /*
       
@@ -316,7 +316,6 @@ $(document).ready(function() {
               Parameters:  
               
               */
-
         type: 'radar',
         data: {
             labels: ["Battery Life", "Quality", "BT Range", "Weight", "Bass", "Pair Speed"],
@@ -345,6 +344,50 @@ $(document).ready(function() {
             ]
         }
     });
+    var radarChartExample = {
+        responsive: true
+    };
 
+    var radarChartExample1 = new Chart(RADARCHARTEXAMPLE1, {
+
+        /*
+      
+              Function: read data and plot radar chart .  
+            
+              Parameters:  
+            
+              */
+
+        type: 'radar',
+        data: {
+            labels: ["Price", "Number of Comment", "BT Range", "Weight", "Bass", "Pair Speed"],
+            datasets: [{
+                    label: string_list[0],
+                    backgroundColor: "rgba(179,181,198,0.2)",
+                    borderWidth: 2,
+                    borderColor: "rgba(179,181,198,1)",
+                    pointBackgroundColor: "rgba(179,181,198,1)",
+                    pointBorderColor: "#fff",
+                    pointHoverBackgroundColor: "#fff",
+                    pointHoverBorderColor: "rgba(179,181,198,1)",
+                    data: [15, 59, 90, 81, 56, 55]
+                },
+                {
+                    label: string_list[1],
+                    backgroundColor: "rgba(51, 179, 90, 0.2)",
+                    borderWidth: 2,
+                    borderColor: "rgba(51, 179, 90, 1)",
+                    pointBackgroundColor: "rgba(51, 179, 90, 1)",
+                    pointBorderColor: "#fff",
+                    pointHoverBackgroundColor: "#fff",
+                    pointHoverBorderColor: "rgba(51, 179, 90, 1)",
+                    data: [28, 48, 40, 19, 96, 27]
+                }
+            ]
+        }
+    });
+    var radarChartExample1 = {
+        responsive: true
+    };
 
 });
