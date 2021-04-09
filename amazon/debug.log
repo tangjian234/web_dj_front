@@ -1223,3 +1223,45 @@ Traceback (most recent call last):
     raise self.model.DoesNotExist(
 download.models.ASIN_task.DoesNotExist: ASIN_task matching query does not exist.
 2021-04-07 17:00:06,818 django.server ERROR    "GET /download/show_asin_task HTTP/1.1" 500 75038
+2021-04-07 18:23:15,495 django.request WARNING  Not Found: /favicon.ico
+2021-04-07 18:23:15,496 django.server WARNING  "GET /favicon.ico HTTP/1.1" 404 2081
+2021-04-07 18:32:04,831 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 18:32:07,795 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 18:32:07,986 django.request WARNING  Not Found: /favicon.ico
+2021-04-07 18:32:07,987 django.server WARNING  "GET /favicon.ico HTTP/1.1" 404 2081
+2021-04-07 18:32:18,931 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 18:47:53,438 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 18:47:56,309 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 18:47:56,492 django.request WARNING  Not Found: /favicon.ico
+2021-04-07 18:47:56,493 django.server WARNING  "GET /favicon.ico HTTP/1.1" 404 2081
+2021-04-07 18:48:01,079 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 20:37:42,984 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 20:37:45,928 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 20:37:46,033 django.request WARNING  Not Found: /favicon.ico
+2021-04-07 20:37:46,034 django.server WARNING  "GET /favicon.ico HTTP/1.1" 404 2081
+2021-04-07 20:37:52,417 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 20:38:38,966 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 20:42:29,982 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 20:43:14,822 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 20:44:50,625 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 20:44:55,370 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 20:45:19,569 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 22:43:27,988 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 22:43:30,497 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 22:43:30,674 django.request WARNING  Not Found: /favicon.ico
+2021-04-07 22:43:30,675 django.server WARNING  "GET /favicon.ico HTTP/1.1" 404 2081
+2021-04-07 22:43:38,668 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 23:04:59,329 django.request ERROR    Internal Server Error: /download/show_asin_task
+Traceback (most recent call last):
+  File "c:\python38\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\python38\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Local\Work\Web\web\amazon\download\views.py", line 332, in show_asin_task
+    context=process_asin_json_files(plot_pk,context)
+  File "C:\Local\Work\Web\web\amazon\download\asin_json_process.py", line 246, in process_asin_json_files
+    product_name_list=[context['asin_dict_list']['asin']['product_name'] for asin in context['asin_dict_list'].keys()]
+  File "C:\Local\Work\Web\web\amazon\download\asin_json_process.py", line 246, in <listcomp>
+    product_name_list=[context['asin_dict_list']['asin']['product_name'] for asin in context['asin_dict_list'].keys()]
+KeyError: 'asin'
+2021-04-07 23:04:59,333 django.server ERROR    "POST /download/show_asin_task HTTP/1.1" 500 111101

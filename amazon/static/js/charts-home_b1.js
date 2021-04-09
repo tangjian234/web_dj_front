@@ -1,14 +1,9 @@
 /*global $, document, Chart, LINECHART, data, options, window*/
-
 $(document).ready(function() {
 
 
 
     'use strict';
-
-    fullName: function(city, country) {
-        return this.firstName + " " + this.lastName + "," + city + "," + country;
-    }
 
     // Main Template Color"
     var brandPrimary = '#33b35a';
@@ -19,14 +14,29 @@ $(document).ready(function() {
     // Get data from django show_asin_task.html 
     // asin_list and asin_dict_list
     var asin_list = JSON.parse(document.getElementById('asin_list').textContent);
-    var product_name_list = JSON.parse(document.getElementById('product_name_list').textContent);
-
     var data_from_django = JSON.parse(document.getElementById('asin_dict_list').textContent);
 
 
 
     // Price data 
+    var d = (data_from_django[asin_list[0]]["price"]);
+    var price_data_1 = d.split(',').map(Number);
+    //window.alert(asin_list[0]);
+    //window.alert(d);
+    //var string_1 = JSON.parse(document.getElementById('asin_string_1').textContent);
+    //var data_from_django_1 = JSON.parse(document.getElementById('price_line_1').textContent);
 
+    var d = data_from_django[asin_list[1]]["price"];
+    var price_data_2 = d.split(',').map(Number);
+
+
+    //        var string_2 = JSON.parse(document.getElementById('asin_string_2').textContent);
+
+    // Comment data 
+    var data_from_django_1 = (data_from_django[asin_list[0]]["no_of_comments"]);
+    var c_data_1 = data_from_django_1.split(',').map(Number);
+    var data_from_django_2 = (data_from_django[asin_list[1]]["no_of_comments"]);
+    var c_data_2 = data_from_django_2.split(',').map(Number);
 
     // x_axis : time line  
     var x_axis = JSON.parse(document.getElementById('x_axis').textContent);
@@ -37,90 +47,23 @@ $(document).ready(function() {
     var data_from_django_1 = JSON.parse(document.getElementById('data').textContent);
     //window.alert(typeof(data_from_django_1));
     //var k = JSON.parse(data_from_django_1)
+    // window.alert(data_from_django_1["S3"]["M1"]);
     // window.alert(data_from_django_1["Laugh"]["Cry"]);
     //var data = JSON.parse("{{data|escapejs}}");
     //for (var x in data) {
     //     window.alert(x)
     // }
-    var d_price = [];
-    var d_comment = [];
-    var price_data = [];
-    var first_price = [];
-    var comment_data = [];
-    var color_list = []
 
-    for (var i = 0, l = asin_list.length; i < l; i++) {
-        var d_template = {
-            //ASIN id 
-            //label: "template",
-            //label: "First dataset - 1 ",
-            fill: true,
-            lineTension: 0.3,
-            backgroundColor: "rgba(77, 193, 75, 0.4)",
-            borderColor: brandPrimary,
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            borderWidth: 1,
-            // points 
-            pointBorderColor: brandPrimary,
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: brandPrimary,
-            pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 5,
-            pointHitRadius: 0,
-            //   data: [50, 50.3, 49, 48, 52, 51,47],
-            //Price line 1
-            //data: [],
-            spanGaps: false
-        };
-        var d = (data_from_django[asin_list[i]]["price"]);
-        price_data[i] = d.split(',').map(Number);
-
-        var s = (data_from_django[asin_list[i]]["no_of_comments"]);
-        comment_data[i] = s.split(',').map(Number);
-
-        // d1[i] = d_template;
-        d_price[i] = d_template
-        d_comment[i] = d_template
-
-        d_price[i]['label'] = product_name_list[i]
-        d_price[i]['data'] = price_data[i]
-
-        d_comment[i]['label'] = product_name_list[i]
-        d_comment[i]['data'] = comment_data[i]
-
-    }
-
-    for (var i = 0, l = asin_list.length; i < l; i++) {
-        first_price[i] = parseFloat(price_data[i][0])
-    }
-
-    var price_max = Math.max(...first_price);
-
-    var first_price_normal = [];
-    var radar_d = [];
-
-    for (var i = 0, l = asin_list.length; i < l; i++) {
-        first_price_normal[i] = Math.round(first_price[i] / price_max * 100)
-    }
-    var radar_d1 = [first_price_normal[1]];
-    radar_d1 = radar_d1.concat([48, 40, 19, 96, 27])
-
-
+    var d1 = []
     var LINECHART = $('#Product_Price_Comparision');
 
     var myLineChart = new Chart(LINECHART, {
         /*
 
             Function: read data and plot line chart 
-            
+        
             Parameters:  
-            
+        
             */
         type: 'line',
         options: {
@@ -134,7 +77,64 @@ $(document).ready(function() {
 
             //x_axis : time line 
             labels: x_axis,
-            datasets: d_price,
+            datasets: [
+
+                {
+                    //ASIN id 
+                    label: asin_list[0],
+                    //label: "First dataset - 1 ",
+                    fill: true,
+                    lineTension: 0.3,
+                    backgroundColor: "rgba(77, 193, 75, 0.4)",
+                    borderColor: brandPrimary,
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    borderWidth: 1,
+                    // points 
+                    pointBorderColor: brandPrimary,
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: brandPrimary,
+                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHitRadius: 0,
+                    //   data: [50, 50.3, 49, 48, 52, 51,47],
+                    //Price line 1
+                    data: price_data_1,
+                    spanGaps: false
+                },
+                {
+                    label: asin_list[1],
+                    //"My Second dataset",
+                    fill: true,
+                    lineTension: 0.3,
+                    backgroundColor: "rgba(75,192,192,0.4)",
+                    borderColor: "rgba(75,192,192,1)",
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    borderWidth: 1,
+                    pointBorderColor: "rgba(75,192,192,1)",
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHitRadius: 10,
+                    //   data: [65, 59, 30, 81, 46, 55, 30],
+                    //Price line 2
+
+                    data: price_data_2,
+                    spanGaps: false
+                }
+            ]
         }
     });
 
@@ -159,7 +159,58 @@ $(document).ready(function() {
             //            labels: ["Jan1", "Feb", "Mar", "Apr", "May", "June", "July"],
             //labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
             labels: x_axis,
-            datasets: d_comment,
+            datasets: [{
+                    label: asin_list[0],
+                    //"My First dataset-1",
+                    fill: true,
+                    lineTension: 0.3,
+                    backgroundColor: "rgba(77, 193, 75, 0.4)",
+                    borderColor: brandPrimary,
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    borderWidth: 1,
+                    pointBorderColor: brandPrimary,
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: brandPrimary,
+                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHitRadius: 0,
+                    //   data: [50, 50.3, 49, 48, 52, 51,47],
+                    data: c_data_1,
+                    spanGaps: false
+                },
+                {
+
+                    label: asin_list[1],
+                    //"My Second dataset",
+                    fill: true,
+                    lineTension: 0.3,
+                    backgroundColor: "rgba(75,192,192,0.4)",
+                    borderColor: "rgba(75,192,192,1)",
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    borderWidth: 1,
+                    pointBorderColor: "rgba(75,192,192,1)",
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHitRadius: 10,
+                    //   data: [65, 59, 30, 81, 46, 55, 30],
+                    data: c_data_2,
+                    spanGaps: false
+                }
+            ]
         }
     });
 
@@ -229,7 +280,7 @@ $(document).ready(function() {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 0,
-                    data: [70, 20, 60, 31, 52, 22, 40],
+                    data: [50, 20, 60, 31, 52, 22, 40],
                     spanGaps: false
                 },
                 {
@@ -259,14 +310,22 @@ $(document).ready(function() {
         }
     });
 
-    var R = $('#radarChartFeature');
-    var radarChartFeature = new Chart(R, {
+    RADARCHARTEXMPLE = $('#radarChartExample');
+
+    var radarChartExample = new Chart(RADARCHARTEXAMPLE, {
+
+        /*
+      
+              Function: read data and plot radar chart .  
+              
+              Parameters:  
+              
+              */
         type: 'radar',
         data: {
-
-            labels: ["Battery Life-", "Quality", "BT Range", "Weight", "Bass", "Pair Speed"],
+            labels: ["Battery Life", "Quality", "BT Range", "Weight", "Bass", "Pair Speed"],
             datasets: [{
-                    label: product_name_list[0],
+                    label: string_list[0],
                     backgroundColor: "rgba(179,181,198,0.2)",
                     borderWidth: 2,
                     borderColor: "rgba(179,181,198,1)",
@@ -274,10 +333,10 @@ $(document).ready(function() {
                     pointBorderColor: "#fff",
                     pointHoverBackgroundColor: "#fff",
                     pointHoverBorderColor: "rgba(179,181,198,1)",
-                    data: [95, 59, 90, 81, 56, 55]
+                    data: [65, 59, 90, 81, 56, 55]
                 },
                 {
-                    label: product_name_list[1],
+                    label: string_list[1],
                     backgroundColor: "rgba(51, 179, 90, 0.2)",
                     borderWidth: 2,
                     borderColor: "rgba(51, 179, 90, 1)",
@@ -285,23 +344,30 @@ $(document).ready(function() {
                     pointBorderColor: "#fff",
                     pointHoverBackgroundColor: "#fff",
                     pointHoverBorderColor: "rgba(51, 179, 90, 1)",
-                    data: [88, 48, 40, 19, 96, 27]
+                    data: [28, 48, 40, 19, 96, 27]
                 }
             ]
         }
     });
-    var radarChartFeature = {
+    var radarChartExample = {
         responsive: true
     };
 
-    var R1 = $('#radarChartParameter');
-    var radarChartParameter = new Chart(R1, {
+    var radarChartExample1 = new Chart(RADARCHARTEXAMPLE1, {
+
+        /*
+      
+              Function: read data and plot radar chart .  
+            
+              Parameters:  
+            
+              */
+
         type: 'radar',
         data: {
-
-            labels: ["Price", "No_of_comment", "BT Range", "Weight", "Bass", "Pair Speed"],
+            labels: ["Price", "Number of Comment", "BT Range", "Weight", "Bass", "Pair Speed"],
             datasets: [{
-                    label: product_name_list[0],
+                    label: string_list[0],
                     backgroundColor: "rgba(179,181,198,0.2)",
                     borderWidth: 2,
                     borderColor: "rgba(179,181,198,1)",
@@ -309,11 +375,10 @@ $(document).ready(function() {
                     pointBorderColor: "#fff",
                     pointHoverBackgroundColor: "#fff",
                     pointHoverBorderColor: "rgba(179,181,198,1)",
-                    data: [100, 48, 40, 19, 96, 27]
+                    data: [15, 59, 90, 81, 56, 55]
                 },
                 {
-
-                    label: product_name_list[1],
+                    label: string_list[1],
                     backgroundColor: "rgba(51, 179, 90, 0.2)",
                     borderWidth: 2,
                     borderColor: "rgba(51, 179, 90, 1)",
@@ -321,15 +386,13 @@ $(document).ready(function() {
                     pointBorderColor: "#fff",
                     pointHoverBackgroundColor: "#fff",
                     pointHoverBorderColor: "rgba(51, 179, 90, 1)",
-                    data: radar_d1
+                    data: [28, 48, 40, 19, 96, 27]
                 }
             ]
         }
     });
-    var radarChartParameter = {
+    var radarChartExample1 = {
         responsive: true
     };
-
-
 
 });

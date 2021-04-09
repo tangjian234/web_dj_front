@@ -59,7 +59,8 @@ def process_title(title):
   x=string_lib.get_regex_string(title,r'^(\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+)',0)
   modified_title_head=x
   modified_title_rest=title.replace(x,"")
-  return(modified_title_head,modified_title_rest)
+  first_word=x=string_lib.get_regex_string(title,r'^(\S+\s+)',0)
+  return(modified_title_head,modified_title_rest,first_word)
 
 
 def process_price(price_download):
@@ -181,6 +182,10 @@ def process_asin_json_files(task_id,context):
   x_axis=[time for time in s[asin]]
   context['x_axis'] =",".join(x_axis)
 
+
+
+
+
   # Rearrange and compression 
   # Seperate into invariant one : feature_list etc and variant ones ,  
   invariant_list=['ASIN','title','feature_list','producer','brand']
@@ -221,7 +226,7 @@ def process_asin_json_files(task_id,context):
     #asin_dict=dict_lib.create_dict()
     asin_dict={}
     # title : hightlight first 6 word for display 
-    (asin_dict['title_head'],asin_dict['title_rest'])=process_title(s[asin]['_invarant']['title'])
+    (asin_dict['title_head'],asin_dict['title_rest'],asin_dict['product_name'])=process_title(s[asin]['_invarant']['title'])
     # bsr : json dump indent 5
     
     
@@ -237,6 +242,12 @@ def process_asin_json_files(task_id,context):
 
   context['asin_dict_list']=asin_dict_list
   print("Line No,:",log_lib.get_line_number(),context['asin_dict_list'])
+
+  product_name_list=[context['asin_dict_list'][asin]['product_name'] for asin in context['asin_dict_list'].keys()]
+  print("Line No,:",log_lib.get_line_number(),product_name_list)
+
+
+  context['product_name_list'] = product_name_list
 
   return(context)
 

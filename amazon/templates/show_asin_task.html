@@ -13,6 +13,7 @@
      -->
      <p>{{ x_axis  | json_script:"x_axis"}}</p>
      <p>{{ asin_list  | json_script:"asin_list"}}</p>
+     <p>{{ product_name_list  | json_script:"product_name_list"}}</p>
      <p>{{ asin_dict_list  | json_script:"asin_dict_list"}}</p>
      <p>{{ data  | json_script:"data"}}</p>
 
@@ -183,10 +184,10 @@
          <!-- Corresponding : var d = (data_from_django[asin_list[0]]["price"]); -->
 
          <div class="card sales-report">
-           <h2 class="display h4">Sales report</h2>
-           <p> Price Comparision of 2 ASIN product-1 </p>
+           <h2 class="display h4">Sales Report</h2>
+           <p> Comparision of Products: Prices </p>
            <div class="line-chart">
-             <canvas id="2_Product_Price_Comparision"></canvas>
+             <canvas id="Product_Price_Comparision"></canvas>
            </div>
          </div>
        </div>
@@ -194,8 +195,8 @@
        <!-- Line Chart : 2 product number of comment comparsion  -->
        <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
          <div class="card sales-report">
-           <h2 class="display h4">Sales report</h2>
-           <p> Comment Comparision of 2 ASIN product-1 </p>
+           <h2 class="display h4">Sales Report</h2>
+           <p> Comparision of Products: Number of Comment  </p>
            <div class="line-chart">
              <canvas id="2_Product_Comment_Comparision"></canvas>
            </div>
@@ -214,25 +215,23 @@
            </div>
            <div class="card-body">
              <div class="chart-container">
-               <canvas id="radarChartExample"></canvas>
+               <canvas id="radarChartFeature"></canvas>
              </div>
            </div>
          </div>
        </div>
-     
-       <!-- Radar Chart :  radarChartKeyParameter    -->
+       <!-- Radar Chart :  radarChartFeature    -->
        <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
          <div class="card radar-chart-example">
            <div class="card-header d-flex align-items-center">
-             <h4>Bluetooth Key Parameter Radar Chart</h4>
+             <h4>Bluetooth Parameter Radar Chart</h4>
            </div>
            <div class="card-body">
              <div class="chart-container">
-               <canvas id="radarChartExample1"></canvas>
+               <canvas id="radarChartParameter"></canvas>
              </div>
            </div>
          </div>
-       </div>     
      
      
      </div>
