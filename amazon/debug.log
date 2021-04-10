@@ -1265,3 +1265,13 @@ Traceback (most recent call last):
     product_name_list=[context['asin_dict_list']['asin']['product_name'] for asin in context['asin_dict_list'].keys()]
 KeyError: 'asin'
 2021-04-07 23:04:59,333 django.server ERROR    "POST /download/show_asin_task HTTP/1.1" 500 111101
+2021-04-07 23:11:28,889 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 23:11:32,133 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-07 23:11:32,333 django.request WARNING  Not Found: /favicon.ico
+2021-04-07 23:11:32,335 django.server WARNING  "GET /favicon.ico HTTP/1.1" 404 2081
+2021-04-07 23:11:40,277 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-08 03:06:42,230 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-08 03:06:46,014 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-08 03:06:46,356 django.request WARNING  Not Found: /favicon.ico
+2021-04-08 03:06:46,358 django.server WARNING  "GET /favicon.ico HTTP/1.1" 404 2081
+2021-04-08 03:06:54,135 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
