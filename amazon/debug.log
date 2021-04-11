@@ -1275,3 +1275,6 @@ KeyError: 'asin'
 2021-04-08 03:06:46,356 django.request WARNING  Not Found: /favicon.ico
 2021-04-08 03:06:46,358 django.server WARNING  "GET /favicon.ico HTTP/1.1" 404 2081
 2021-04-08 03:06:54,135 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-09 23:43:59,311 django.server WARNING  "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1767
+2021-04-09 23:43:59,504 django.request WARNING  Not Found: /favicon.ico
+2021-04-09 23:43:59,505 django.server WARNING  "GET /favicon.ico HTTP/1.1" 404 2081
