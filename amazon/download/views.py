@@ -58,7 +58,7 @@ from durationwidget.widgets import TimeDurationWidget
 import log_lib    
 
 
-from .asin_json_process import load_asin_json,create_task_result_json,process_asin_json_files
+from .asin_json_process import create_task_result_json,process_asin_json_files
 from .apscheduler_handle import scrapy_scheduler
 
 ####### create logger
