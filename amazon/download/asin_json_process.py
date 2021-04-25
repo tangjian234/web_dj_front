@@ -130,7 +130,16 @@ from pathlib import Path
 
 """ // MARK : SECTION 2 : Process downloaded asin_file by asin download spider  """
 bsr_ranking = namedtuple('bsr_ranking',['category','rank'])
+from django.utils.html import format_html 
+def prettify(bsr):
+  re=""
+  bsr=json_lib.load_json_string(bsr)
+  for k,v in bsr.items():
+    s=format_html("No.<strong>{}<\strong> in {}\n ".format(v['rank'],v['category']))
+    re=re+s
+  return(re)
 
+from django.templatetags.static import static
 #def process_asin_json_files(download_output_list,master_file,task_id):  
 def process_asin_json_files(task_id,context):  
   '''
@@ -231,12 +240,16 @@ def process_asin_json_files(task_id,context):
     
     # image 
     i="<img src= \"{% static 'product_img/" + asin +".jpg" + "\' %}\">"
-    asin_dict['img'] = i
-    
+    #asin_dict['img'] = i
+    asin_dict['img'] = static("product_img/{}.jpg".format(asin))
+
     for v in variant_list:
       # price 
       _=[s[asin][t][v] for t in s[asin].keys() if '--' in t]      
       asin_dict[v+'_first_number']= _[0]
+      # special treatment of best_seller_rank
+      if 'best_seller_rank' in v : 
+        asin_dict[v+'_first_number']=prettify(asin_dict[v+'_first_number'])
       asin_dict[v]= ",".join(_)
     # best_seller_rank
     
