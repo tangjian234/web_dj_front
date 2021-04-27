@@ -6,9 +6,7 @@ $(document).ready(function() {
 
     'use strict';
 
-    fullName: function(city, country) {
-        return this.firstName + " " + this.lastName + "," + city + "," + country;
-    }
+
 
     // Main Template Color"
     var brandPrimary = '#33b35a';

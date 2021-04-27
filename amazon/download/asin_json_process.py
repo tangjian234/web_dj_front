@@ -130,12 +130,14 @@ from pathlib import Path
 
 """ // MARK : SECTION 2 : Process downloaded asin_file by asin download spider  """
 bsr_ranking = namedtuple('bsr_ranking',['category','rank'])
+
 from django.utils.html import format_html 
-def prettify(bsr):
+
+def prettify_bsr(bsr):
   re=""
   bsr=json_lib.load_json_string(bsr)
   for k,v in bsr.items():
-    s=format_html("No.<strong>{}<\strong> in {}\n ".format(v['rank'],v['category']))
+    s=format_html("No.{} in {}\n ".format(v['rank'],v['category']))
     re=re+s
   return(re)
 
@@ -191,10 +193,6 @@ def process_asin_json_files(task_id,context):
   x_axis=[time for time in s[asin]]
   context['x_axis'] =",".join(x_axis)
 
-
-
-
-
   # Rearrange and compression 
   # Seperate into invariant one : feature_list etc and variant ones ,  
   invariant_list=['ASIN','title','feature_list','producer','brand']
@@ -238,9 +236,7 @@ def process_asin_json_files(task_id,context):
     (asin_dict['title_head'],asin_dict['title_rest'],asin_dict['product_name'])=process_title(s[asin]['_invarant']['title'])
     # bsr : json dump indent 5
     
-    # image 
-    i="<img src= \"{% static 'product_img/" + asin +".jpg" + "\' %}\">"
-    #asin_dict['img'] = i
+    # create image name :  
     asin_dict['img'] = static("product_img/{}.jpg".format(asin))
 
     for v in variant_list:
@@ -249,7 +245,7 @@ def process_asin_json_files(task_id,context):
       asin_dict[v+'_first_number']= _[0]
       # special treatment of best_seller_rank
       if 'best_seller_rank' in v : 
-        asin_dict[v+'_first_number']=prettify(asin_dict[v+'_first_number'])
+        asin_dict[v+'_first_number']=prettify_bsr(asin_dict[v+'_first_number'])
       asin_dict[v]= ",".join(_)
     # best_seller_rank
     
