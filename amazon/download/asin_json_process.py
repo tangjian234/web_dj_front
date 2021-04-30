@@ -141,6 +141,7 @@ def prettify_bsr(bsr):
     re=re+s
   return(re)
 
+
 from django.templatetags.static import static
 #def process_asin_json_files(download_output_list,master_file,task_id):  
 def process_asin_json_files(task_id,context):  
